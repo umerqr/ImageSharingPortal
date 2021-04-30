@@ -1,0 +1,24 @@
+
+.content-label-heading{
+  font-family: 'Catamaran', sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  font-stretch: normal !important;
+  font-style: normal !important;
+  line-height: normal !important;
+  letter-spacing: normal !important;
+  color: #576274 !important;
+  margin-bottom: 8px !important;
+  text-transform: none !important;
+}
+.app-selectable-heading-div{
+  display: flex;
+  flex-direction: row;
+}
+.app-selectable-info-icon{
+  width: 12px;
+  height: 12px;
+  margin-left: 5px;
+  margin-top: 1px;
+  }
+

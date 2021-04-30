@@ -1,0 +1,662 @@
+.form-section {
+  padding: 25px 0px;
+}
+
+.main-title {
+  font-size: 24px;
+  line-height: 42px;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+}
+
+.login-inner-container {
+  margin-top: 200px;
+  padding: 30px;
+}
+
+.login-text-field-styling {
+  min-width: 500px !important;
+}
+
+.sub-title {
+  font-family: "Mulish", sans-serif;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  color: #787878;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.resgistration-form {
+  max-width: 380px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 0px 15px;
+}
+
+.inner-body {
+  width: 100%;
+  margin: 25px auto 50px;
+  position: relative;
+}
+
+.form-header {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.form-title {
+  font-family: "Raleway", sans-serif;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 23px;
+  color: #273469;
+  margin-bottom: 8px;
+  position: relative;
+}
+
+.form-title span {
+  display: inline-block;
+  background: #fff;
+  padding-right: 10px;
+}
+
+.form-title:after {
+  content: "";
+  width: 100%;
+  height: auto;
+  border: 1px solid #273469;
+  display: inline-block;
+  position: absolute;
+  right: 0px;
+  top: 12px;
+  z-index: -1;
+}
+
+.form-subtitle {
+  font-family: "Mulish", sans-serif;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 15px;
+  color: #273469;
+  margin-bottom: 0px;
+}
+
+.email-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column;
+}
+
+.email-title {
+  font-family: "Raleway", sans-serif;
+  font-weight: bold;
+  font-size: 36px;
+  line-height: 42px;
+  text-align: center;
+  color: #1e8582;
+  margin-bottom: 16px;
+}
+
+.email-sub-title {
+  font-family: "Mulish", sans-serif;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  text-align: center;
+  color: #787878;
+  margin-bottom: 30px;
+}
+
+.email-msg-text {
+  font-family: "Mulish", sans-serif;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 18px;
+  text-align: center;
+  color: #787878;
+  margin-bottom: 10px;
+}
+
+.email-msg-text span {
+  color: #f8951b;
+  font-weight: 600;
+}
+
+.email-img {
+  margin-bottom: 16px;
+  max-width: 600px;
+}
+
+.email-img img {
+  max-width: 100%;
+}
+
+.thankyou-text {
+  font-family: "Mulish", sans-serif;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 18px;
+  text-align: center;
+  color: #787878;
+  margin-bottom: 30px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.form-label {
+  font-family: "Mulish", sans-serif;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 18px;
+  color: #787878;
+}
+
+.form-control {
+  border: 1px solid #e5e5e5;
+  border-radius: 3px;
+  height: 40px;
+  padding: 0px 16px;
+  font-family: "Mulish", sans-serif;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  color: #000000;
+  background-color: #fff;
+}
+
+.form-control:focus {
+  color: #000000;
+  background-color: #fff;
+  border-color: #f8951b;
+  outline: 0;
+  box-shadow: none;
+}
+
+.form-control.is-invalid:focus,
+.was-validated .form-control:invalid:focus {
+  border-color: #ff0a0a;
+  box-shadow: none;
+}
+
+.form-control:disabled,
+.form-control[readonly] {
+  background-color: #fff;
+  opacity: 1;
+}
+
+.form-control.is-invalid,
+.was-validated .form-control:invalid {
+  border-color: #ff0a0a;
+  background-image: none;
+  padding: 0px 16px;
+  /* background-image: url('../../assets/img/info-red.svg'); */
+}
+
+.form-control.is-visa {
+  padding-right: 42px;
+  /* background-image: url("../../assets/img/visa.svg"); */
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 30px;
+}
+
+.info-img {
+  width: 15px;
+  height: 15px;
+  margin-left: 6px;
+  display: inline-block;
+  position: relative;
+  top: -2px;
+}
+
+.info-img img {
+  width: 100%;
+  height: auto;
+  vertical-align: middle;
+}
+
+.error-text {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 18px;
+  color: #ff0a0a;
+  margin: 0px;
+  position: absolute;
+  padding-bottom: 2rem;
+}
+
+.form-group .append-input {
+  font-family: "Mulish", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  color: #1e8582;
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  padding: 0px 16px;
+}
+
+.input-group-custom {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.append-custom-input {
+  font-family: "Mulish", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+  color: #1e8582;
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  padding: 0px 16px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.input-group-country {
+  flex: 1 1 auto;
+}
+
+.email-form {
+  max-width: 350px;
+  width: 100%;
+  margin-top: 30px;
+}
+
+.email-form .error-text {
+  top: 40px;
+}
+
+.custom-box {
+  border: 1px solid #ced4da;
+  box-sizing: border-box;
+  border-radius: 0.25rem;
+  width: 100%;
+  height: 40px;
+}
+
+.right-box {
+  position: absolute;
+  right: 0px;
+  top: 10px;
+  width: 300px;
+}
+
+.right-box.stp4-box {
+  top: 48px;
+}
+
+.daily-rectangle {
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+  box-sizing: border-box;
+  border-radius: 3px;
+  width: 100%;
+  position: relative;
+  margin-bottom: 10px;
+  padding-bottom: 30px;
+}
+
+.daily-rectangle:before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: -25px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border: 12px solid transparent;
+  border-right-color: #e5e5e5;
+}
+
+.daily-rectangle:after {
+  content: "";
+  display: block;
+  position: absolute;
+  left: -22px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border: 11px solid transparent;
+  border-right-color: white;
+}
+
+.daily-head {
+  font-family: "Raleway", sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 28px;
+  color: #1e8582;
+  border-bottom: 1px solid #e5e5e5;
+  padding: 6px 30px;
+}
+
+.daily-list {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 16px 30px 0px;
+  font-family: "Mulish", sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  color: #787878;
+}
+
+.daily-list span:first-child {
+  flex: 0 0 150px;
+}
+
+.daily-list.total {
+  font-family: "Mulish", sans-serif;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 25px;
+  color: #000000;
+}
+
+.daily-text {
+  font-family: "Mulish", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 18px;
+  color: #787878;
+  margin-bottom: 16px;
+}
+
+.theme-link {
+  font-family: "Mulish", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 18px;
+  text-decoration: underline;
+  color: #1e8582;
+  cursor: pointer;
+}
+
+.theme-link:hover {
+  color: #49b8ad;
+  text-decoration: underline;
+}
+
+.error-muted {
+  font-family: "Mulish", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 18px;
+  color: #787878;
+}
+
+.cursor {
+  cursor: not-allowed;
+  color: #fff;
+}
+
+.RFS-StepperContainer.stepclass {
+  position: relative;
+  padding: 0px 0px;
+  margin: 30px auto;
+  max-width: 600px;
+}
+
+.stepclass:after {
+  content: "";
+  background: #e5e5e5;
+  border-radius: 30px;
+  position: absolute;
+  width: 100%;
+  height: 5px;
+  left: 0px;
+  top: 15px;
+  z-index: -1;
+}
+
+.stepclass .RFS-ConnectorContainer {
+  display: none;
+}
+
+.stepclass .stepclassName {
+  display: none;
+}
+
+.stepclass .stepclassName.active,
+.stepclass .stepclassName.completed {
+  display: block;
+}
+
+.stepclass .RFS-StepMain {
+  position: relative;
+}
+
+.stepclass .RFS-StepContainer {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.stepclass .stepclassName.completed:after {
+  content: "";
+  background: #49b8ad;
+  width: 100%;
+  height: 5px;
+  position: absolute;
+  left: 0px;
+  top: 15px;
+  z-index: 1;
+}
+
+.stepclass .stepclassName.active:after {
+  content: "";
+  background: #49b8ad;
+  width: 43%;
+  height: 5px;
+  position: absolute;
+  left: 0px;
+  top: 15px;
+  z-index: 1;
+}
+
+.stepclass .RFS-StepCircle {
+  width: 30px !important;
+  height: 30px !important;
+  background: transparent !important;
+}
+
+.stepclass .RFS-StepCircle:focus {
+  outline: none;
+}
+
+.stepclass .RFS-StepCircleContent {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  background: #49b8ad;
+  border: 2px solid #ffffff;
+  box-sizing: border-box;
+  box-shadow: -1px 4px 4px rgba(30, 133, 130, 0.17);
+  z-index: 2;
+  font-family: "Mulish", sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 18px;
+  color: #ffffff !important;
+  display: flex;
+  align-items: center;
+  border-radius: 50%;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.stepclass .RFS-StepCircleContent.completed {
+  width: 20px;
+  height: 20px;
+  background: #49b8ad;
+  box-shadow: -1px 4px 4px rgba(30, 133, 130, 0.17);
+  border: 0px;
+  font-family: "Mulish", sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 10px;
+  line-height: 13px;
+}
+
+.stepclass .RFS-Label {
+  display: block;
+  margin-top: 6px;
+  text-align: center;
+  font-family: "Mulish", sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 10px;
+  line-height: 13px;
+  color: #1e8582;
+}
+
+.custom-alert-box {
+  background: #fddbdb;
+  border-radius: 3px;
+  border-color: #fddbdb;
+  font-family: "Mulish", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 18px;
+  color: #ff0a0a;
+  padding: 8px 20px 8px 40px;
+}
+
+.custom-alert-box .close {
+  position: absolute;
+  top: 0px;
+  left: 16px;
+  padding: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #ff0a0a;
+  font-size: 17px;
+  opacity: 1;
+}
+
+.btn-wrap {
+  margin: 0 auto;
+  max-width: 600px;
+}
+
+.done-step {
+  font-family: "Raleway";
+  font-style: "normal";
+  font-weight: bold;
+  font-size: 36px;
+  line-height: 42px;
+}
+
+.done-text {
+  font-family: "Mulish", sans-serif;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.disabled-class {
+  background-color: #e5e5e5;
+  color: #787878;
+  border-color: #e5e5e5;
+}
+
+.forgot-password {
+  width: 176px;
+  height: 21px;
+  left: 799px;
+  top: 545px;
+  font-family: "Mulish";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+  text-decoration-line: underline;
+  color: #1e8582;
+  cursor: pointer;
+}
+
+.remenber-text {
+  padding: 6px;
+}
+
+.remember-password {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 18px;
+  color: #787878;
+}
+
+.login-footer {
+  display: flex;
+  padding-bottom: 3rem;
+}
+
+.login-footer-error {
+  display: flex;
+  padding-bottom: 3rem;
+  padding-top: 1.5rem;
+}
+
+.login-button {
+  background: #f8951b;
+  height: 29px;
+  width: 150px;
+  left: 0px;
+  top: 0px;
+  border-radius: 30px;
+  float: right;
+  cursor: pointer;
+}
+
+.login-button-text {
+  left: 21.63%;
+  right: 21.44%;
+  top: 20%;
+  bottom: 22.5%;
+  font-family: Mulish;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 16px;
+  line-height: 28px;
+  display: flex;
+  justify-content: center;
+  color: #ffffff;
+}
+
+.login-password-main {
+  margin-top: 15px;
+}

@@ -1,0 +1,20 @@
+.top-bar-container{
+    background-color: #eff6fc!important;
+}
+.top-bar-dropdowns-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center !important;
+    width: 100%;
+    color: #6a78b3;
+}
+.top-bar-label{
+    border-color: #e0e2e3;
+    border-style: none solid none solid;
+    border-width: 1px;
+    padding: 10px;
+    margin: 0px 10px 0px 10px!important;
+    cursor: pointer;
+    color: #2a3b8f;
+    font-size: 16px !important;
+}

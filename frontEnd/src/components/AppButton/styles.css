@@ -1,0 +1,36 @@
+.app-btn-theme {
+  background: #fb9448;
+  border-radius: 5px;
+  font-weight: 200;
+  font-size: 18px;
+  line-height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #ffffff;
+  transition: all 0.3s ease;
+  min-width: 200px;
+  max-height: 40px;
+  padding: 8px 20px;
+  outline: none !important;
+  border: none !important;
+}
+
+.app-btn-theme:hover {
+  background: #fb9448;
+  border: 1px solid #fb9448;
+  color: #ffffff;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+.app-btn-theme:disabled,
+.app-btn-theme:disabled:hover {
+  border: 1px solid #e5e5e5;
+  background: #e5e5e5;
+  color: #787878;
+  text-decoration: none;
+  opacity: 1;
+}

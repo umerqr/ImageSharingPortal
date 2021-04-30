@@ -1,0 +1,17 @@
+.app-text-heading{
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    font-stretch: normal !important;
+    font-style: normal !important;
+    line-height: normal !important;
+    letter-spacing: normal !important;
+    color: #576274 !important;
+    margin-bottom: 8px !important;
+}
+/* .app-text-field-style{
+
+} */
+.app-text-field-style .MuiInputBase-input{
+    max-height: 44px !important;
+    padding: 10px 10px !important;
+  }

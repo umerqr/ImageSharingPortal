@@ -1,0 +1,24 @@
+.content-img {
+    height: 100px;
+
+}
+
+.img-box {
+    max-width: 120px;
+    max-height: 120px;
+    display: block;
+    margin-right: 50px;
+    text-align: center;
+}
+
+.img-box p {
+    color: #2a3b8f !important;
+    font-weight: 600;
+}
+
+.img-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}

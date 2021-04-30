@@ -1,0 +1,14 @@
+.popover-sub-items {
+  z-index: 100 !important;
+  max-width: 200px;
+  box-shadow: 2px 2px #efeff2;
+}
+
+.popover-sub-items .MuiPaper-elevation8 {
+  min-width: 300px !important;
+}
+
+.preview-styling {
+  max-height: 300px !important;
+  max-width: 300px !important;
+}
