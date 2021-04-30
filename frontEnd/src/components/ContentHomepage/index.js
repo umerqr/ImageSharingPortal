@@ -1,7 +1,6 @@
-import React, { lazy, useCallback, useState } from 'react';
+import React, { lazy, useState } from 'react';
 // import PropTypes from 'prop-types';
 import './styles.css';
-import { useDropzone } from 'react-dropzone';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 const AppButton = lazy(() => import(`../AppButton`));
 const AppPopper = lazy(() => import(`../AppPopper`));
@@ -22,7 +21,7 @@ const getItemStyle = (isDragging, draggableStyle) => ({
 const getListStyle = (isDraggingOver) => ({
   background: isDraggingOver ? 'lightblue' : 'lightgrey',
   padding: grid,
-  width: 250,
+  display: `flex`,
 });
 
 const reorder = (list, startIndex, endIndex) => {
@@ -76,12 +75,7 @@ function ContentHomepage(props) {
         url: `https://image.shutterstock.com/shutterstock/photos/384192586/display_1500/stock-photo-group-of-friends-making-barbecue-in-the-backyard-concept-about-good-and-positive-mood-with-friends-384192586.jpg`,
       },
     ],
-    selected: [
-      {
-        id: `0`,
-        url: `https://images.ctfassets.net/hrltx12pl8hq/2ii9eMNqYTJaZ2zhmMnbt4/6120099cbcd32498f01993efabd7df73/shutterstock_1009843408.jpg?fit=fill&w=480&h=270`,
-      },
-    ],
+    selected: [],
   });
   const handleMouseEnter = (event, itemName) => {
     handleTabButton(event, itemName);
@@ -98,11 +92,6 @@ function ContentHomepage(props) {
     setActiveImage(url);
     handleClick(e);
   };
-  const onDrop = useCallback((acceptedFiles) => {
-    console.log(acceptedFiles, `acceptedFiles`);
-    // Do something with the files
-  }, []);
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
   const id2List = {
     droppable: 'items',
     droppable2: 'selected',
@@ -110,7 +99,6 @@ function ContentHomepage(props) {
   const getList = (id) => draggableState[id2List[id]];
   const onDragEndHandler = (result) => {
     const { source, destination } = result;
-    console.log(source, destination, `resultt`);
     if (!destination) {
       return;
     }
@@ -125,10 +113,8 @@ function ContentHomepage(props) {
       let state = { ...draggableState, items };
 
       if (source.droppableId === 'droppable2') {
-        state = { selected: items };
+        state = { ...draggableState, selected: items };
       }
-
-      console.log(state, `state`);
       setDraggableState(state);
     } else {
       const result = move(
@@ -137,7 +123,6 @@ function ContentHomepage(props) {
         source,
         destination
       );
-      console.log(result, `ress`);
       setDraggableState({
         ...draggableState,
         items: result.droppable,
@@ -150,61 +135,19 @@ function ContentHomepage(props) {
       <div className='d-flex justify-content-center'>
         <div>
           <AppButton label='Add Media' onClick={() => setShowAddArea(true)} />
-
-          {showAddArea && (
-            <div className='input-dropzone-style' {...getRootProps()}>
-              <input {...getInputProps()} className='input-dropzone-style' />
-              {isDragActive ? (
-                <p>Drop the files here ...</p>
-              ) : (
-                <p>Drag 'n' drop some files here, or click to select files</p>
-              )}
-            </div>
-          )}
         </div>
       </div>
       <div onMouseLeave={() => handleMouseLeave()}>
         <DragDropContext onDragEnd={onDragEndHandler}>
-          <Droppable droppableId='droppable'>
+          <Droppable droppableId='droppable2' direction={'horizontal'}>
             {(provided, snapshot) => (
               <div
                 ref={provided.innerRef}
                 style={getListStyle(snapshot.isDraggingOver)}
+                className='mb-5'
               >
-                {draggableState.items.map((item, index) => (
-                  <Draggable key={item.id} draggableId={item.id} index={index}>
-                    {(provided, snapshot) => (
-                      <div
-                        ref={provided.innerRef}
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        style={getItemStyle(
-                          snapshot.isDragging,
-                          provided.draggableProps.style
-                        )}
-                      >
-                        <img
-                          className='array-image-styling'
-                          key={item.id}
-                          src={item.url}
-                          alt='I'
-                          onMouseLeave={() => handleMouseLeave()}
-                          onMouseEnter={(e) => handleMouseEnter(e, item.url)}
-                        />
-                      </div>
-                    )}
-                  </Draggable>
-                ))}
-                {provided.placeholder}
-              </div>
-            )}
-          </Droppable>
-          <Droppable droppableId='droppable2'>
-            {(provided, snapshot) => (
-              <div
-                ref={provided.innerRef}
-                style={getListStyle(snapshot.isDraggingOver)}
-              >
+                {draggableState.selected.length === 0 &&
+                  `Please Add Media here`}
                 {draggableState.selected.map((item, index) => (
                   <Draggable key={item.id} draggableId={item.id} index={index}>
                     {(provided, snapshot) => (
@@ -229,10 +172,54 @@ function ContentHomepage(props) {
                     )}
                   </Draggable>
                 ))}
-                {provided.placeholder}
+                <div className='image-placeholder-styling'>
+                  {provided.placeholder}
+                </div>
               </div>
             )}
           </Droppable>
+          {showAddArea && (
+            <Droppable droppableId='droppable' direction={'horizontal'}>
+              {(provided, snapshot) => (
+                <div
+                  ref={provided.innerRef}
+                  style={getListStyle(snapshot.isDraggingOver)}
+                >
+                  {draggableState.items.map((item, index) => (
+                    <Draggable
+                      key={item.id}
+                      draggableId={item.id}
+                      index={index}
+                    >
+                      {(provided, snapshot) => (
+                        <div
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                          style={getItemStyle(
+                            snapshot.isDragging,
+                            provided.draggableProps.style
+                          )}
+                        >
+                          <img
+                            className='array-image-styling'
+                            key={item.id}
+                            src={item.url}
+                            alt='I'
+                            onMouseLeave={() => handleMouseLeave()}
+                            onMouseEnter={(e) => handleMouseEnter(e, item.url)}
+                          />
+                        </div>
+                      )}
+                    </Draggable>
+                  ))}
+                  <div className='image-placeholder-styling'>
+                    {provided.placeholder}
+                  </div>
+                </div>
+              )}
+            </Droppable>
+          )}
         </DragDropContext>
         <AppPopper
           subItem={activeImage}
