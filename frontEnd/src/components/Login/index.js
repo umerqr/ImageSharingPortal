@@ -5,6 +5,7 @@ import { Paper } from '@material-ui/core';
 import './styles.css';
 import AppTextField from '../AppTextField';
 import { AuthContext } from '../auth/authContext';
+import { notificationWithIcon } from '../../utils/notification';
 
 export const isValidEmail = (email) => {
   // eslint-disable-next-line
@@ -35,7 +36,7 @@ const Login = () => {
   const handleSignIn = async () => {
     const loginCredentials = { email, password };
     if (email === `` || password === ``) {
-      alert(`Please add in both fields`);
+      notificationWithIcon('error', `Error`, `Please add in both fields`);
     } else {
       return authState.handleLogin(loginCredentials);
     }

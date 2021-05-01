@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { lazy, useEffect, useState } from 'react';
+import React, { lazy, useContext, useEffect, useState } from 'react';
 // import PropTypes from 'prop-types';
 import './styles.css';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
@@ -10,6 +10,7 @@ import {
   postListDataAction,
 } from './actions';
 import AppLabel from '../AppLabel';
+import { AuthContext } from '../auth/authContext';
 const AppButton = lazy(() => import(`../AppButton`));
 const AppPopper = lazy(() => import(`../AppPopper`));
 
@@ -60,6 +61,7 @@ function ContentHomepage(props) {
     (state) => state.contentHomepageReducer
   );
 
+  const auth = useContext(AuthContext);
   const { listData, userListData } = contentHomepageReducer;
   const dispatch = useDispatch();
   const [draggableState, setDraggableState] = useState({
@@ -137,7 +139,10 @@ function ContentHomepage(props) {
   return (
     <div>
       <div className='d-flex justify-content-center'>
-        <AppLabel className="welcome-label-styling" label='Welcome to the Image Portal' />
+        <AppLabel
+          className='welcome-label-styling'
+          label={`Welcome to the Image Portal ${auth.user.email}`}
+        />
       </div>
       <div className='d-flex justify-content-end'>
         <div>
