@@ -3,6 +3,7 @@ import './App.css';
 import { AuthConsumer } from './components/auth/authContext';
 import HomePage from './components/Homepage/';
 import Login from './components/Login/';
+import 'antd/dist/antd.css';
 
 function App() {
   return (

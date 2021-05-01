@@ -1,5 +1,6 @@
 import { call, put, takeLatest } from '@redux-saga/core/effects';
 import { getUtil, postUtil } from '../../utils/api';
+import { notificationWithIcon } from '../../utils/notification';
 import {
   fetchListDataError,
   fetchListDataSuccess,
@@ -47,6 +48,7 @@ export function* postUserListData({ payload }) {
     if (response.status === 200) {
       const res = response;
       yield put(postListDataSuccess(res.data));
+      notificationWithIcon('success', `Successful`, `Posted Successfully`);
     }
   } catch (err) {
     yield put(postListDataError(err));
