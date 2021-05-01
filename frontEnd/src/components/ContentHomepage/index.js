@@ -1,7 +1,9 @@
-import React, { lazy, useState } from 'react';
+import React, { lazy, useEffect, useState } from 'react';
 // import PropTypes from 'prop-types';
 import './styles.css';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchListDataAction, fetchUserListDataAction } from './actions';
 const AppButton = lazy(() => import(`../AppButton`));
 const AppPopper = lazy(() => import(`../AppPopper`));
 
@@ -22,6 +24,7 @@ const getListStyle = (isDraggingOver) => ({
   background: isDraggingOver ? 'lightblue' : 'lightgrey',
   padding: grid,
   display: `flex`,
+  overflow: `auto`,
 });
 
 const reorder = (list, startIndex, endIndex) => {
@@ -48,35 +51,31 @@ function ContentHomepage(props) {
   const [showAddArea, setShowAddArea] = useState(false);
   const [activeImage, setActiveImage] = useState(``);
   const [anchorEl, setAnchorEl] = useState(null);
+  const contentHomepageReducer = useSelector(
+    (state) => state.contentHomepageReducer
+  );
+  const { listData, userListData } = contentHomepageReducer;
+  const dispatch = useDispatch();
   const [draggableState, setDraggableState] = useState({
-    items: [
-      {
-        id: `1`,
-        url: `https://image.shutterstock.com/shutterstock/photos/384192586/display_1500/stock-photo-group-of-friends-making-barbecue-in-the-backyard-concept-about-good-and-positive-mood-with-friends-384192586.jpg`,
-      },
-      {
-        id: `2`,
-        url: `https://images.ctfassets.net/hrltx12pl8hq/2ii9eMNqYTJaZ2zhmMnbt4/6120099cbcd32498f01993efabd7df73/shutterstock_1009843408.jpg?fit=fill&w=480&h=270`,
-      },
-      {
-        id: `3`,
-        url: `https://image.shutterstock.com/shutterstock/photos/384192586/display_1500/stock-photo-group-of-friends-making-barbecue-in-the-backyard-concept-about-good-and-positive-mood-with-friends-384192586.jpg`,
-      },
-      {
-        id: `4`,
-        url: `https://image.shutterstock.com/shutterstock/photos/384192586/display_1500/stock-photo-group-of-friends-making-barbecue-in-the-backyard-concept-about-good-and-positive-mood-with-friends-384192586.jpg`,
-      },
-      {
-        id: `5`,
-        url: `https://image.shutterstock.com/shutterstock/photos/384192586/display_1500/stock-photo-group-of-friends-making-barbecue-in-the-backyard-concept-about-good-and-positive-mood-with-friends-384192586.jpg`,
-      },
-      {
-        id: `6`,
-        url: `https://image.shutterstock.com/shutterstock/photos/384192586/display_1500/stock-photo-group-of-friends-making-barbecue-in-the-backyard-concept-about-good-and-positive-mood-with-friends-384192586.jpg`,
-      },
-    ],
+    items: [],
     selected: [],
   });
+  useEffect(() => {
+    dispatch(fetchListDataAction());
+    dispatch(fetchUserListDataAction());
+  }, []);
+  useEffect(() => {
+    if (userListData) {
+      setDraggableState({ ...draggableState, selected: userListData });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userListData]);
+  useEffect(() => {
+    if (listData) {
+      setDraggableState({ ...draggableState, items: listData });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [listData]);
   const handleMouseEnter = (event, itemName) => {
     handleTabButton(event, itemName);
     const { currentTarget } = event;
@@ -130,6 +129,7 @@ function ContentHomepage(props) {
       });
     }
   };
+  console.log(draggableState, listData, `drag strate`);
   return (
     <div>
       <div className='d-flex justify-content-center'>

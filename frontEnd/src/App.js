@@ -1,16 +1,28 @@
-import { Route, Switch } from 'react-router-dom';
+import { Route, Router, Switch } from 'react-router-dom';
 import './App.css';
-import Homepage from './components/Homepage/';
+import { AuthConsumer } from './components/auth/authContext';
+import HomePage from './components/Homepage/';
 import Login from './components/Login/';
 
 function App() {
   return (
-    <div className='App'>
-      <Switch>
-        <Route path='/login' component={Login} />
-        <Route path='/' component={Homepage} />
-      </Switch>
-    </div>
+    <AuthConsumer>
+      {(authState) => (
+        // <Router>
+        <div>
+          {authState.authenticated ? (
+            <Switch>
+              <Route path='/' render={(props) => <HomePage {...props} />} />
+            </Switch>
+          ) : (
+            <Switch>
+              <Route path='/' render={(props) => <Login {...props} />} />
+            </Switch>
+          )}
+        </div>
+        // {/* </Router> */}
+      )}
+    </AuthConsumer>
   );
 }
 

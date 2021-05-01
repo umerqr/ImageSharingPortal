@@ -63,14 +63,11 @@ const Login = () => {
   }
   const authState = useContext(AuthContext);
 
-  console.log(authState, `asd`);
   const handleSignIn = async () => {
     const loginCredentials = { email, password };
-    authState.handleLogin(loginCredentials);
     if (email === `` || password === ``) {
       alert(`Please add in both fields`);
     } else {
-      console.log(authState, `handlesign in came?`);
       return authState.handleLogin(loginCredentials);
     }
   };

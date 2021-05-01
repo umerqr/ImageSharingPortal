@@ -11,8 +11,19 @@ let corsOptions = {
   origin: 'http://localhost:8081',
 };
 
-app.use(cors(corsOptions));
-
+// app.use(cors(corsOptions));
+app.use((req, res, next) => {
+  res.header(`Access-Control-Allow-Origin`, `*`);
+  res.header(
+    `Access-Control-Allow-Methods`,
+    `POST,DELETE,PUT,PATCH,GET,OPTIONS`
+  );
+  res.header(
+    `Access-Control-Allow-Headers`,
+    `Origin,X-Requested-With,Content-Type,Accept,Authorization,Access-Control-Allow-1, token,Access-Control-Allow-Origin,x-amz-acl,account`
+  );
+  return next();
+});
 // parse requests of content-type - application/json
 app.use(bodyParser.json());
 

@@ -9,6 +9,7 @@ import rootReducer from './reducers';
 import rootSaga from './rootSaga';
 import { createStore, applyMiddleware } from 'redux';
 import { BrowserRouter } from 'react-router-dom';
+import Auth from './components/auth/Auth';
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
@@ -17,7 +18,9 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <App />
+        <Auth>
+          <App />
+        </Auth>
       </BrowserRouter>
     </Provider>
   </React.StrictMode>,

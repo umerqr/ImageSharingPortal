@@ -5,6 +5,7 @@ export const AuthContext = createContext({
   user: {}, // store all the user details
   accessToken: ``, // accessToken of user for
   handleLogin: () => {}, // handle login process
+  logout: () => {}, // handle login process
 });
 export const AuthConsumer = AuthContext.Consumer;
 export const AuthProvider = AuthContext.Provider;
