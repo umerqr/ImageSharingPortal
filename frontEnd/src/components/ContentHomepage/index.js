@@ -9,6 +9,7 @@ import {
   fetchUserListDataAction,
   postListDataAction,
 } from './actions';
+import AppLabel from '../AppLabel';
 const AppButton = lazy(() => import(`../AppButton`));
 const AppPopper = lazy(() => import(`../AppPopper`));
 
@@ -135,6 +136,9 @@ function ContentHomepage(props) {
   };
   return (
     <div>
+      <div className='d-flex justify-content-center'>
+        <AppLabel className="welcome-label-styling" label='Welcome to the Image Portal' />
+      </div>
       <div className='d-flex justify-content-end'>
         <div>
           <AppButton

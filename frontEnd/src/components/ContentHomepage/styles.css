@@ -36,3 +36,9 @@
 .image-placeholder-styling {
     min-height: 200px;
 }
+
+.welcome-label-styling {
+    font-size: 28px !important;
+    font-weight: 600 !important;
+    color: #687184 !important
+}
