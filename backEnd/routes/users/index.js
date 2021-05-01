@@ -7,4 +7,5 @@ module.exports = (api) => {
   api.get(`/imageData/`, functions.fetchData);
   api.get(`/fetchUserInfo/`, functions.fetchUserInfo);
   api.get(`/fetchUserData/`, functions.fetchUserData);
+  api.post(`/postUserImage/`, functions.postUserImage);
 };

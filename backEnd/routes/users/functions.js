@@ -124,11 +124,27 @@ const postUserImage = async (req, res) => {
       if (err) {
         res.sendStatus(403);
       } else {
-        const userDataItems = userImageDataset.find(
-          (x) => x.email === authData.user.email
-        ).items;
-
-      
+        if (items) {
+          fs.readFile(
+            './routes/users/data.json',
+            'utf8',
+            function readFileCallback(err, data) {
+              if (err) {
+                console.log(err, `errr`);
+              } else {
+                let obj = JSON.parse(data); //now it an object
+                obj.find((x) => x.email === authData.user.email).items = items; //add some data
+                let json = JSON.stringify(obj); //convert it back to json
+                fs.writeFile('./routes/users/data.json', json, function (err) {
+                  if (err) throw err;
+                }); // write it back
+              }
+            }
+          );
+          res.sendStatus(200);
+        } else {
+          res.sendStatus(500);
+        }
       }
     });
   } catch (e) {

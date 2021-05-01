@@ -3,11 +3,13 @@ import React, { lazy, useEffect, useState } from 'react';
 import './styles.css';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchListDataAction, fetchUserListDataAction } from './actions';
+import {
+  fetchListDataAction,
+  fetchUserListDataAction,
+  postListDataAction,
+} from './actions';
 const AppButton = lazy(() => import(`../AppButton`));
 const AppPopper = lazy(() => import(`../AppPopper`));
-
-// fake data generator
 
 const grid = 8;
 
@@ -129,7 +131,6 @@ function ContentHomepage(props) {
       });
     }
   };
-  console.log(draggableState, listData, `drag strate`);
   return (
     <div>
       <div className='d-flex justify-content-center'>
@@ -221,6 +222,10 @@ function ContentHomepage(props) {
             </Droppable>
           )}
         </DragDropContext>
+        <AppButton
+          label='Update Images'
+          onClick={() => dispatch(postListDataAction(draggableState.selected))}
+        />
         <AppPopper
           subItem={activeImage}
           handleMouseLeave={handleMouseLeave}
