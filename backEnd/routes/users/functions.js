@@ -43,7 +43,7 @@ const verifyToken = (req, res, next) => {
 
 const fetchData = async (req, res) => {
   try {
-    const imageData = imageDataset;
+    const imageData = imageDataset.items;
     const { token } = req.headers;
     jwt.verify(token, 'secretkey', (err, authData) => {
       if (err) {
@@ -55,11 +55,14 @@ const fetchData = async (req, res) => {
         const userDataset = userImageDataset.find((x) => x.email === email)
           .items;
 
+        const filtedData = imageData.filter((x) => {
+          if (!userDataset.some((y) => y.id === x.id)) {
+            return x;
+          }
+        });
         if (imageData) {
           res.json({
-            items: imageData.items.filter(
-              (x) => x.id !== userDataset.map((y) => y.id)
-            ),
+            items: filtedData,
           });
         }
       }
@@ -67,9 +70,6 @@ const fetchData = async (req, res) => {
   } catch (e) {
     console.log(`error occured`);
   }
-  //   finally {
-  //     res.json(responseObj.result);
-  //   }
 };
 const fetchUserData = async (req, res) => {
   try {
@@ -93,9 +93,6 @@ const fetchUserData = async (req, res) => {
   } catch (e) {
     console.log(`error occured`);
   }
-  //   finally {
-  //     res.json(responseObj.result);
-  //   }
 };
 const fetchUserInfo = async (req, res) => {
   const { token } = req.headers;
@@ -130,7 +127,6 @@ const postUserImage = async (req, res) => {
             'utf8',
             function readFileCallback(err, data) {
               if (err) {
-                console.log(err, `errr`);
               } else {
                 let obj = JSON.parse(data); //now it an object
                 obj.find((x) => x.email === authData.user.email).items = items; //add some data
