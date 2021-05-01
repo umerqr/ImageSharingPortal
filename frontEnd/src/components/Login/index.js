@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import AppButton from '../AppButton';
@@ -6,6 +6,7 @@ import { Checkbox, FormControlLabel, Paper } from '@material-ui/core';
 import './styles.css';
 import AppTextField from '../AppTextField';
 import AppLabel from '../AppLabel';
+import { AuthContext } from '../auth/authContext';
 
 export const isValidEmail = (email) => {
   // eslint-disable-next-line
@@ -48,39 +49,6 @@ const Login = () => {
   //   }
   // }, []);
 
-  function validateUser() {
-    let flag = 0;
-    if (mockData.mail === email && mockData.password === password) {
-      flag = 1;
-    } else if (
-      adminMockData.mail === email &&
-      adminMockData.password === password
-    ) {
-      flag = 2;
-    }
-    if (checked && flag === 1) {
-      localStorage.username = email;
-      localStorage.password = password;
-      localStorage.checkbox = true;
-    }
-    if (!checked && flag === 1) {
-      localStorage.username = '';
-      localStorage.password = '';
-      localStorage.checkbox = false;
-    }
-    if (flag === 1) {
-      alert('login success');
-      history.push('./homepage');
-    } else if (flag === 2) {
-      alert('admin logged in');
-      window.localStorage.setItem('loggedInEmail', email);
-      history.push('./homepage');
-    } else {
-      setError(true);
-      alert('wrong details');
-    }
-  }
-
   // function handlePasswordChange(e) {
   //   setPassword(e.target.value);
   // }
@@ -93,6 +61,19 @@ const Login = () => {
       setErrorMail(true);
     }
   }
+  const authState = useContext(AuthContext);
+
+  console.log(authState, `asd`);
+  const handleSignIn = async () => {
+    const loginCredentials = { email, password };
+    authState.handleLogin(loginCredentials);
+    if (email === `` || password === ``) {
+      alert(`Please add in both fields`);
+    } else {
+      console.log(authState, `handlesign in came?`);
+      return authState.handleLogin(loginCredentials);
+    }
+  };
 
   return (
     <>
@@ -154,7 +135,7 @@ const Login = () => {
           <div className='d-flex align-items-end flex-column'>
             <AppButton
               className='btn-theme mb-2'
-              onClick={validateUser}
+              onClick={handleSignIn}
               label='login'
             ></AppButton>
           </div>

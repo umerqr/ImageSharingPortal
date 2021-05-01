@@ -1,0 +1,26 @@
+[{
+    "balance": "$3,946.45",
+    "picture": "http://placehold.it/32x32",
+    "age": 23,
+    "name": "Bird Ramsey",
+    "gender": "male",
+    "company": "NIMON",
+    "email": "abc@gmail.com",
+    "password": "123123"
+}, {
+    "balance": "$2,499.49",
+    "picture": "http://placehold.it/32x32",
+    "age": 31,
+    "name": "Lillian Burgess",
+    "gender": "female",
+    "email": "qwe@gmail.com",
+    "password": "123123"
+}, {
+    "balance": "$2,820.18",
+    "picture": "http://placehold.it/32x32",
+    "age": 34,
+    "name": "Kristie Cole",
+    "gender": "female",
+    "email": "asd@gmail.com",
+    "password": "123123"
+}]
