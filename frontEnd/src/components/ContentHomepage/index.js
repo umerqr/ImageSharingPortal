@@ -141,7 +141,7 @@ function ContentHomepage(props) {
       <div className='d-flex justify-content-center'>
         <AppLabel
           className='welcome-label-styling'
-          label={`Welcome to the Image Portal ${auth.user.email}`}
+          label={`Welcome to the Image Portal ${auth.user.name}`}
         />
       </div>
       <div className='d-flex justify-content-end'>

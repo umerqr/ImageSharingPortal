@@ -76,20 +76,17 @@ const Auth = (props) => {
   const setSession = async (data) => {
     axios.defaults.headers.common.token = `${incomingToken}`;
     if (incomingToken) {
-      const user = {
-        email: data.email,
-      };
+      console.log(data, `data`);
+
       setState({
         ...state,
         authenticated: true,
-        user,
+        user: data,
       });
       localStorage.setItem(`token`, incomingToken);
       localStorage.setItem(`authenticated`, true);
     } else {
-      const user = {
-        email: '',
-      };
+      const user = {};
       setState({
         ...state,
         authenticated: false,
