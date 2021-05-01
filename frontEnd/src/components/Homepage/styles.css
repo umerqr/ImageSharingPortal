@@ -22,3 +22,19 @@
     align-items: center;
     margin-top: 30px;
 }
+
+.drawer-close {
+    width: 140px !important;
+}
+
+.drawer-close>div {
+    overflow: visible;
+    width: 60px;
+    margin-top: 48px;
+    background-color: #eff6fc;
+}
+
+.homepage-container {
+    margin-left: 70px;
+    margin-right: 30px;
+}

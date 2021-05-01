@@ -1,36 +1,39 @@
 .app-btn-theme {
-  background: #fb9448;
+  background-color: #eff6fc !important;
+  color: #0b253c;
+  box-shadow: none;
+  border-color: transparent;
+  min-width: 140px !important;
   border-radius: 5px;
-  font-weight: 200;
-  font-size: 18px;
-  line-height: 22px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  color: #ffffff;
-  transition: all 0.3s ease;
-  min-width: 200px;
-  max-height: 40px;
-  padding: 8px 20px;
-  outline: none !important;
+  font-family: 'Catamaran', sans-serif !important;
+  border: 1px solid transparent;
+  padding: 9px 15px !important;
+  transition: .3s ease;
+  cursor: pointer;
+  font-size: 13px;
   border: none !important;
+  outline: none !important;
 }
 
 .app-btn-theme:hover {
-  background: #fb9448;
-  border: 1px solid #fb9448;
-  color: #ffffff;
-  text-decoration: none;
-  cursor: pointer;
+  background-color: #287cc5 !important;
+  box-shadow: 0px 2px 5px #eff6fc;
+  color: #fff;
+  outline: none !important;
+  border: 1px solid transparent;
+}
+
+.app-btn-theme:focus {
+  outline: none !important;
+  border: none !important;
 }
 
 
 .app-btn-theme:disabled,
 .app-btn-theme:disabled:hover {
-  border: 1px solid #e5e5e5;
   background: #e5e5e5;
   color: #787878;
   text-decoration: none;
   opacity: 1;
+  border: none !important;
 }

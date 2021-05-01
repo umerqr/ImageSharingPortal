@@ -1,5 +1,6 @@
 import { call, put, takeLatest } from '@redux-saga/core/effects';
 import { getUtil, postUtil } from '../../utils/api';
+import { notificationWithIcon } from '../../utils/notification';
 import { loginError, loginSuccess } from './actions';
 import { DEFAULT_CONST, FETCH_USER_INFO } from './constants';
 
@@ -15,8 +16,15 @@ export function* loginFunction({ payload }) {
     if (response.status === 200) {
       const res = response;
       yield put(loginSuccess(res.data));
+      notificationWithIcon('success', `Successful`, `Logged In Successfully`);
     }
   } catch (err) {
+    notificationWithIcon(
+      'error',
+      `Error`,
+      `Wrong credentials or user does not exist`
+    );
+    console.log(`thissss?`);
     yield put(loginError(err));
   }
 }

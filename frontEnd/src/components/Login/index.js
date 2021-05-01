@@ -1,11 +1,9 @@
 import React, { useContext, useState } from 'react';
-import PropTypes from 'prop-types';
-import { useHistory } from 'react-router-dom';
+// import PropTypes from 'prop-types';
 import AppButton from '../AppButton';
-import { Checkbox, FormControlLabel, Paper } from '@material-ui/core';
+import { Paper } from '@material-ui/core';
 import './styles.css';
 import AppTextField from '../AppTextField';
-import AppLabel from '../AppLabel';
 import { AuthContext } from '../auth/authContext';
 
 export const isValidEmail = (email) => {
@@ -19,39 +17,10 @@ export const isValidPassword = (password) => {
   return pass.test(password);
 };
 
-const infoData = {
-  email: `user@gmail.com`,
-  password: `123`,
-};
-
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [checked, setChecked] = useState(false);
-  const [error, setError] = useState(false);
   const [errorMail, setErrorMail] = useState(false);
-
-  const history = useHistory();
-  const mockData = { mail: infoData.email, password: infoData.password };
-  const adminMockData = { mail: 'admin@gmail.com', password: 'admin' };
-  function onChange(e) {
-    setChecked(e.target.checked);
-  }
-
-  // useEffect(() => {
-  //   window.localStorage.removeItem('loggedInEmail');
-  //   if (localStorage.checkbox && localStorage.email !== '') {
-  //     setChecked(true);
-  //     setEmail(localStorage.username);
-  //     setPassword(localStorage.password);
-  //   } else {
-  //     setChecked(false);
-  //   }
-  // }, []);
-
-  // function handlePasswordChange(e) {
-  //   setPassword(e.target.value);
-  // }
 
   function handleEmailChange(value, stateToUpdate) {
     stateToUpdate(value);
@@ -110,30 +79,13 @@ const Login = () => {
                 stateToUpdate={setPassword}
               />
             </div>
-            {error ? (
-              <AppLabel label='Error, No User found.' className='error-text' />
-            ) : null}
           </div>
 
-          <div className={error ? 'login-footer-error' : 'login-footer'}>
-            <div className='remember-password'>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    className='remenber-text'
-                    onChange={onChange}
-                    checked={checked}
-                  />
-                }
-                label={<AppLabel label='Remember me' />}
-              />
-            </div>
-          </div>
           <div className='d-flex align-items-end flex-column'>
             <AppButton
-              className='btn-theme mb-2'
+              className='btn-theme mb-2 mt-5'
               onClick={handleSignIn}
-              label='login'
+              label='Login'
             ></AppButton>
           </div>
         </Paper>
@@ -142,13 +94,6 @@ const Login = () => {
   );
 };
 
-Login.propTypes = {
-  infoData: PropTypes.shape({
-    country: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-    password: PropTypes.string.isRequired,
-    contact: PropTypes.number.isRequired,
-  }).isRequired,
-};
+Login.propTypes = {};
 
 export default Login;

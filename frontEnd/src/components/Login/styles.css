@@ -17,10 +17,11 @@
 .login-inner-container {
   margin-top: 200px;
   padding: 30px;
+  width: 400px;
 }
 
 .login-text-field-styling {
-  min-width: 500px !important;
+  min-width: 300px !important;
 }
 
 .sub-title {

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { lazy, useEffect, useState } from 'react';
 // import PropTypes from 'prop-types';
 import './styles.css';
@@ -23,10 +24,11 @@ const getItemStyle = (isDragging, draggableStyle) => ({
 });
 
 const getListStyle = (isDraggingOver) => ({
-  background: isDraggingOver ? 'lightblue' : 'lightgrey',
+  background: isDraggingOver ? 'lightblue' : '#eff6fc',
   padding: grid,
   display: `flex`,
   overflow: `auto`,
+  borderRadius: `10px`,
 });
 
 const reorder = (list, startIndex, endIndex) => {
@@ -56,12 +58,14 @@ function ContentHomepage(props) {
   const contentHomepageReducer = useSelector(
     (state) => state.contentHomepageReducer
   );
+
   const { listData, userListData } = contentHomepageReducer;
   const dispatch = useDispatch();
   const [draggableState, setDraggableState] = useState({
     items: [],
     selected: [],
   });
+
   useEffect(() => {
     dispatch(fetchListDataAction());
     dispatch(fetchUserListDataAction());
@@ -70,13 +74,11 @@ function ContentHomepage(props) {
     if (userListData) {
       setDraggableState({ ...draggableState, selected: userListData });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userListData]);
   useEffect(() => {
     if (listData) {
       setDraggableState({ ...draggableState, items: listData });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [listData]);
   const handleMouseEnter = (event, itemName) => {
     handleTabButton(event, itemName);
@@ -133,12 +135,16 @@ function ContentHomepage(props) {
   };
   return (
     <div>
-      <div className='d-flex justify-content-center'>
+      <div className='d-flex justify-content-end'>
         <div>
-          <AppButton label='Add Media' onClick={() => setShowAddArea(true)} />
+          <AppButton
+            className='mt-5'
+            label='Add Media'
+            onClick={() => setShowAddArea(true)}
+          />
         </div>
       </div>
-      <div onMouseLeave={() => handleMouseLeave()}>
+      <div className='mt-5' onMouseLeave={() => handleMouseLeave()}>
         <DragDropContext onDragEnd={onDragEndHandler}>
           <Droppable droppableId='droppable2' direction={'horizontal'}>
             {(provided, snapshot) => (
@@ -224,7 +230,11 @@ function ContentHomepage(props) {
         </DragDropContext>
         <AppButton
           label='Update Images'
+          className='mt-2'
           onClick={() => dispatch(postListDataAction(draggableState.selected))}
+          disabled={(() => {
+            if (userListData === draggableState.selected) return true;
+          })()}
         />
         <AppPopper
           subItem={activeImage}
