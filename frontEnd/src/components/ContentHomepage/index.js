@@ -162,8 +162,11 @@ function ContentHomepage(props) {
                 style={getListStyle(snapshot.isDraggingOver)}
                 className='mb-5'
               >
-                {draggableState.selected.length === 0 &&
-                  `Please Add Media here`}
+                {draggableState.selected.length === 0 && (
+                  <div className='no-image-styling'>
+                    <AppLabel label='Please Add Media here' />
+                  </div>
+                )}
                 {draggableState.selected.map((item, index) => (
                   <Draggable key={item.id} draggableId={item.id} index={index}>
                     {(provided, snapshot) => (
@@ -195,46 +198,61 @@ function ContentHomepage(props) {
             )}
           </Droppable>
           {showAddArea && (
-            <Droppable droppableId='droppable' direction={'horizontal'}>
-              {(provided, snapshot) => (
-                <div
-                  ref={provided.innerRef}
-                  style={getListStyle(snapshot.isDraggingOver)}
-                >
-                  {draggableState.items.map((item, index) => (
-                    <Draggable
-                      key={item.id}
-                      draggableId={item.id}
-                      index={index}
-                    >
-                      {(provided, snapshot) => (
-                        <div
-                          ref={provided.innerRef}
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
-                          style={getItemStyle(
-                            snapshot.isDragging,
-                            provided.draggableProps.style
-                          )}
-                        >
-                          <img
-                            className='array-image-styling'
-                            key={item.id}
-                            src={item.url}
-                            alt='I'
-                            onMouseLeave={() => handleMouseLeave()}
-                            onMouseEnter={(e) => handleMouseEnter(e, item.url)}
-                          />
-                        </div>
-                      )}
-                    </Draggable>
-                  ))}
-                  <div className='image-placeholder-styling'>
-                    {provided.placeholder}
+            <>
+              <div className='d-flex justify-content-center'>
+                <AppLabel
+                  className='add-image-label-styling'
+                  label='Please Select images from the list below.'
+                />
+              </div>
+              <Droppable droppableId='droppable' direction={'horizontal'}>
+                {(provided, snapshot) => (
+                  <div
+                    ref={provided.innerRef}
+                    style={getListStyle(snapshot.isDraggingOver)}
+                  >
+                    {draggableState.items.length === 0 && (
+                      <div className='no-image-styling'>
+                        <AppLabel label='There are no more images to select from.' />
+                      </div>
+                    )}
+                    {draggableState.items.map((item, index) => (
+                      <Draggable
+                        key={item.id}
+                        draggableId={item.id}
+                        index={index}
+                      >
+                        {(provided, snapshot) => (
+                          <div
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            style={getItemStyle(
+                              snapshot.isDragging,
+                              provided.draggableProps.style
+                            )}
+                          >
+                            <img
+                              className='array-image-styling'
+                              key={item.id}
+                              src={item.url}
+                              alt='I'
+                              onMouseLeave={() => handleMouseLeave()}
+                              onMouseEnter={(e) =>
+                                handleMouseEnter(e, item.url)
+                              }
+                            />
+                          </div>
+                        )}
+                      </Draggable>
+                    ))}
+                    <div className='image-placeholder-styling'>
+                      {provided.placeholder}
+                    </div>
                   </div>
-                </div>
-              )}
-            </Droppable>
+                )}
+              </Droppable>
+            </>
           )}
         </DragDropContext>
         <AppButton

@@ -42,3 +42,14 @@
     font-weight: 600 !important;
     color: #687184 !important
 }
+
+.add-image-label-styling {
+    font-size: 22px !important;
+    font-weight: 400 !important;
+    color: #687184 !important
+}
+
+.no-image-styling {
+    text-align: center;
+    width: 100%;
+}
