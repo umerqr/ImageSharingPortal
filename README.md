@@ -4,7 +4,7 @@ Tech stack:  Redux, Saga, ReactJs, NodeJs, ExpressJs
 
 A very simple app showcasing drag and drop with backend in nodejs. 
 
-P.s it can be improved a lot ! made this as fast as i could.
+P.s there's always room for improvement
 
 Users to test with:
 
