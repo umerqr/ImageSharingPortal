@@ -1,2 +1,0 @@
-(this["webpackJsonplife-insurance-app"]=this["webpackJsonplife-insurance-app"]||[]).push([[3],{219:function(e,n,s){"use strict";s.r(n);s(0);var a=s(225),t=(s(220),s(4));n.default=function(e){var n=e.anchorEl,s=e.handleMouseLeave,o=e.subItem,c=Boolean(n);return Object(t.jsx)(a.a,{className:"popover-sub-items",open:c,anchorEl:n,onClose:s,placement:"bottom",transition:!0,children:Object(t.jsx)("img",{src:o,alt:"t",className:"preview-styling"})})}},220:function(e,n,s){}}]);
-//# sourceMappingURL=3.b967f5d7.chunk.js.map
