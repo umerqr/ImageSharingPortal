@@ -164,7 +164,7 @@ function ContentHomepage(props) {
                           src={item.url}
                           alt='I'
                           onMouseLeave={() => handleMouseLeave()}
-                          onMouseEnter={(e) => handleMouseEnter(e, item.url)}
+                          onMouseEnter={(e) => handleMouseEnter(e, item.id)}
                         />
                       </div>
                     )}
@@ -217,9 +217,7 @@ function ContentHomepage(props) {
                               src={item.url}
                               alt='I'
                               onMouseLeave={() => handleMouseLeave()}
-                              onMouseEnter={(e) =>
-                                handleMouseEnter(e, item.url)
-                              }
+                              onMouseEnter={(e) => handleMouseEnter(e, item.id)}
                             />
                           </div>
                         )}

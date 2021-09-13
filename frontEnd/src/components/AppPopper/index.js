@@ -17,7 +17,7 @@ function AppPopper(props) {
       placement='bottom'
       transition={true}
     >
-      <img src={subItem} alt='t' className='preview-styling' />
+      <div>Image ID: {subItem}</div>
     </Popper>
   );
 }
