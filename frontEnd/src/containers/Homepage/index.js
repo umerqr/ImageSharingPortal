@@ -40,7 +40,7 @@ function Homepage(props) {
     </div>
   );
   return (
-    <div>
+    <div className='main-container'>
       <TopBar />
       <hr className='m-0'></hr>
       <Drawer variant='permanent' open={false} className={`drawer-close`}>

@@ -1,22 +1,81 @@
 .top-bar-container {
-    background-color: #eff6fc !important;
+  background-color: rgb(86, 100, 210) !important;
 }
 
 .top-bar-dropdowns-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center !important;
-    width: 100%;
-    color: #fafafa;
+  display: flex;
+  flex-direction: row;
+  justify-content: center !important;
+  width: 100%;
+  color: #fafafa;
 }
 
 .top-bar-label {
-    border-color: #e0e2e3;
-    border-style: none solid none solid;
-    border-width: 1px;
-    padding: 10px;
-    margin: 0px 10px 0px 10px !important;
-    cursor: pointer;
-    color: #2a3b8f;
-    font-size: 16px !important;
+  border-color: #e0e2e3;
+  border-style: none solid none solid;
+  border-width: 1px;
+  padding: 10px;
+  margin: 0px 10px 0px 10px !important;
+  cursor: pointer;
+  color: #2a3b8f;
+  font-size: 16px !important;
+}
+
+.nav-bar-menu-container {
+  padding: 0px !important;
+}
+
+.nav-arrow_box {
+  position: relative;
+  background: white;
+  width: 100%;
+  max-height: 100%;
+}
+
+.nav-action-menu-item {
+  flex-direction: row;
+  display: flex;
+}
+.nav-action-menu-item:hover {
+  background-color: rgb(86, 100, 210);
+}
+
+.nav-action-menu-item:hover img {
+  filter: invert(40%) sepia(11%) saturate(5023%) hue-rotate(204deg)
+    brightness(95%) contrast(87%);
+}
+.nav-action-menu-item:hover .MuiTypography-root {
+  color: #524c4c !important;
+}
+
+.profile-icon-image-button-nav {
+  max-height: 40px;
+  max-width: 40px;
+  outline: none !important;
+  border: none !important;
+}
+.nav-org-label {
+  color: #666666 !important;
+  font-family: 'Catamaran', sans-serif !important;
+  font-size: 10px !important;
+  font-weight: 400 !important;
+  padding: 0 0 0 0px !important;
+  align-self: start;
+}
+.nav-org-sub-label {
+  color: #666666 !important;
+  font-family: 'Catamaran', sans-serif !important;
+  font-size: 15px !important;
+  font-weight: 400 !important;
+  padding: 0 0 0 0px !important;
+  align-self: start;
+}
+
+.nav-arrow_box .MuiListItem-root.Mui-disabled {
+  opacity: 1;
+}
+.nav-action-icon {
+  width: 14px;
+  height: 14px;
+  margin-right: 5px;
 }

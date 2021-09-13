@@ -11,47 +11,14 @@ import {
 } from './actions';
 import AppLabel from '../../components/AppLabel';
 import { AuthContext } from '../../containers/auth/authContext';
+import {
+  getItemStyle,
+  getListStyle,
+  move,
+  reorder,
+} from '../../utils/helpers/dragHelpers';
 const AppButton = lazy(() => import(`../../components/AppButton`));
 const AppPopper = lazy(() => import(`../../components/AppPopper`));
-
-const grid = 8;
-
-const getItemStyle = (isDragging, draggableStyle) => ({
-  userSelect: 'none',
-  padding: grid * 2,
-  margin: `0 0 ${grid}px 0`,
-  // change background colour if dragging
-  background: isDragging ? 'lightgreen' : '',
-  ...draggableStyle,
-});
-
-const getListStyle = (isDraggingOver) => ({
-  background: isDraggingOver ? 'lightblue' : '#eff6fc',
-  padding: grid,
-  display: `flex`,
-  overflow: `auto`,
-  borderRadius: `10px`,
-});
-
-const reorder = (list, startIndex, endIndex) => {
-  const result = Array.from(list);
-  const [removed] = result.splice(startIndex, 1);
-  result.splice(endIndex, 0, removed);
-
-  return result;
-};
-
-const move = (source, destination, droppableSource, droppableDestination) => {
-  const sourceClone = Array.from(source);
-  const destClone = Array.from(destination);
-  const [removed] = sourceClone.splice(droppableSource.index, 1);
-  destClone.splice(droppableDestination.index, 0, removed);
-  const result = {};
-  result[droppableSource.droppableId] = sourceClone;
-  result[droppableDestination.droppableId] = destClone;
-
-  return result;
-};
 
 function ContentHomepage(props) {
   const [showAddArea, setShowAddArea] = useState(false);
@@ -108,7 +75,7 @@ function ContentHomepage(props) {
     if (!destination) {
       return;
     }
-
+    // Checks if its the same div, if so it reorders the items
     if (source.droppableId === destination.droppableId) {
       const items = reorder(
         getList(source.droppableId),
@@ -122,7 +89,9 @@ function ContentHomepage(props) {
         state = { ...draggableState, selected: items };
       }
       setDraggableState(state);
-    } else {
+    }
+    // if its not the same div it moves the items
+    else {
       const result = move(
         getList(source.droppableId),
         getList(destination.droppableId),
@@ -137,7 +106,7 @@ function ContentHomepage(props) {
     }
   };
   return (
-    <div>
+    <>
       <div className='d-flex justify-content-center'>
         <AppLabel
           className='welcome-label-styling'
@@ -146,6 +115,16 @@ function ContentHomepage(props) {
       </div>
       <div className='d-flex justify-content-end'>
         <div>
+          <AppButton
+            label='Update Images'
+            className='mt-2 mr-2'
+            onClick={() =>
+              dispatch(postListDataAction(draggableState.selected))
+            }
+            disabled={(() => {
+              if (userListData === draggableState.selected) return true;
+            })()}
+          />
           <AppButton
             className='mt-5'
             label='Add Media'
@@ -255,21 +234,14 @@ function ContentHomepage(props) {
             </>
           )}
         </DragDropContext>
-        <AppButton
-          label='Update Images'
-          className='mt-2'
-          onClick={() => dispatch(postListDataAction(draggableState.selected))}
-          disabled={(() => {
-            if (userListData === draggableState.selected) return true;
-          })()}
-        />
+
         <AppPopper
           subItem={activeImage}
           handleMouseLeave={handleMouseLeave}
           anchorEl={anchorEl}
         />
       </div>
-    </div>
+    </>
   );
 }
 
