@@ -9,7 +9,7 @@ import rootReducer from './reducers';
 import rootSaga from './rootSaga';
 import { createStore, applyMiddleware } from 'redux';
 import { BrowserRouter } from 'react-router-dom';
-import Auth from './components/auth/Auth';
+import Auth from './containers/auth/Auth';
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));

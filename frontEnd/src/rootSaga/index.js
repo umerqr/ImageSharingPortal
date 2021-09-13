@@ -1,6 +1,6 @@
 import { all } from 'redux-saga/effects';
 
-import { authSaga } from '../components/auth/authSaga';
+import { authSaga } from '../containers/auth/authSaga';
 import { contentHomepageSaga } from '../containers/ContentHomepage/saga';
 
 export default function* rootSaga() {

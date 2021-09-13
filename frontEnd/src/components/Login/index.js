@@ -4,7 +4,7 @@ import AppButton from '../AppButton';
 import { Paper } from '@material-ui/core';
 import './styles.css';
 import AppTextField from '../AppTextField';
-import { AuthContext } from '../auth/authContext';
+import { AuthContext } from '../../containers/auth/authContext';
 import { notificationWithIcon } from '../../utils/notification';
 
 export const isValidEmail = (email) => {

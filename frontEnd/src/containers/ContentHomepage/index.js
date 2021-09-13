@@ -10,7 +10,7 @@ import {
   postListDataAction,
 } from './actions';
 import AppLabel from '../../components/AppLabel';
-import { AuthContext } from '../../components/auth/authContext';
+import { AuthContext } from '../../containers/auth/authContext';
 const AppButton = lazy(() => import(`../../components/AppButton`));
 const AppPopper = lazy(() => import(`../../components/AppPopper`));
 

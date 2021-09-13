@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import { AppBar, Toolbar } from '@material-ui/core';
 import './styles.css';
 import AppButton from '../AppButton';
-import { AuthContext } from '../auth/authContext';
+import { AuthContext } from '../../containers/auth/authContext';
 
 function TopBar(props) {
   const authState = useContext(AuthContext);

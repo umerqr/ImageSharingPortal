@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import homePageReducer from '../containers/Homepage/reducer';
-import authReducer from '../components/auth/reducer';
+import authReducer from '../containers/auth/reducer';
 import contentHomepageReducer from '../containers/ContentHomepage/reducer';
 // import contentHomepageReducer from '../components/ContentHomepage/reducer';
 

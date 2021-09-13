@@ -1,6 +1,6 @@
 import { Route, Switch } from 'react-router-dom';
 import './App.css';
-import { AuthConsumer } from './components/auth/authContext';
+import { AuthConsumer } from './containers/auth/authContext';
 import HomePage from './containers/Homepage/';
 import Login from './components/Login/';
 import 'antd/dist/antd.css';
