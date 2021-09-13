@@ -28,7 +28,7 @@ export function* fetchListData({ payload }) {
   }
 }
 export function* fetchUserListData({ payload }) {
-  const requestURL = `https://image-share-portal.herokuapp.com/api/fetchUserData`;
+  const requestURL = `/api/fetchUserData`;
   try {
     const response = yield call(getUtil, requestURL);
     if (response.status === 200) {

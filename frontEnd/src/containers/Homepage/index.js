@@ -2,7 +2,7 @@ import { Drawer } from '@material-ui/core';
 import React, { lazy } from 'react';
 import { Suspense } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import TopBar from '../TopBar';
+import TopBar from '../../components/TopBar';
 import './styles.css';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
@@ -40,7 +40,7 @@ function Homepage(props) {
     </div>
   );
   return (
-    <div>
+    <div className='main-container'>
       <TopBar />
       <hr className='m-0'></hr>
       <Drawer variant='permanent' open={false} className={`drawer-close`}>

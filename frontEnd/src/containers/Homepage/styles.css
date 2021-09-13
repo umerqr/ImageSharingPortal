@@ -1,0 +1,47 @@
+.content-img {
+  height: 100px;
+}
+
+.img-box {
+  max-width: 120px;
+  max-height: 120px;
+  display: block;
+  margin-right: 50px;
+  text-align: center;
+}
+
+.img-box p {
+  color: #2a3b8f !important;
+  font-weight: 600;
+}
+
+.img-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.drawer-close {
+  width: 140px !important;
+}
+
+.drawer-close > div {
+  overflow: visible;
+  width: 60px;
+  margin-top: 48px;
+  /* background-color: rgb(86, 100, 210); */
+}
+
+.main-container {
+  max-height: 100vh;
+  overflow: hidden;
+}
+
+.homepage-container {
+  margin-left: 70px;
+  padding-right: 30px;
+  overflow: auto;
+  max-height: 100vh;
+  padding-bottom: 60px;
+}
