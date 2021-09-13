@@ -76,8 +76,6 @@ const Auth = (props) => {
   const setSession = async (data) => {
     axios.defaults.headers.common.token = `${incomingToken}`;
     if (incomingToken) {
-      console.log(data, `data`);
-
       setState({
         ...state,
         authenticated: true,

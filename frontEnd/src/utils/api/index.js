@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
 const postUtil = (url, data) => axios.post(url, data);
 
 const putUtil = (url, data) =>

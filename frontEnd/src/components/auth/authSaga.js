@@ -5,7 +5,7 @@ import { loginError, loginSuccess } from './actions';
 import { DEFAULT_CONST, FETCH_USER_INFO } from './constants';
 
 export function* loginFunction({ payload }) {
-  const requestURL = `https://image-share-portal.herokuapp.com/api/login`;
+  const requestURL = `/api/login`;
   const { email, password } = payload;
   const loginData = {
     email,
@@ -24,12 +24,11 @@ export function* loginFunction({ payload }) {
       `Error`,
       `Wrong credentials or user does not exist`
     );
-    console.log(`thissss?`);
     yield put(loginError(err));
   }
 }
 export function* fetchUserInfo() {
-  const requestURL = `https://image-share-portal.herokuapp.com/api/fetchUserInfo`;
+  const requestURL = `/api/fetchUserInfo`;
   try {
     const response = yield call(getUtil, requestURL);
     if (response.status === 200) {

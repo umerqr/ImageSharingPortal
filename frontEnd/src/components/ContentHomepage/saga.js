@@ -16,7 +16,7 @@ import {
 } from './constants';
 
 export function* fetchListData({ payload }) {
-  const requestURL = `https://image-share-portal.herokuapp.com/api/imageData`;
+  const requestURL = `/api/imageData`;
   try {
     const response = yield call(getUtil, requestURL);
     if (response.status === 200) {
@@ -40,8 +40,7 @@ export function* fetchUserListData({ payload }) {
   }
 }
 export function* postUserListData({ payload }) {
-  const requestURL = `https://image-share-portal.herokuapp.com/api/postUserImage`;
-  console.log(payload, `payload`);
+  const requestURL = `/api/postUserImage`;
   const postObj = { items: payload };
   try {
     const response = yield call(postUtil, requestURL, postObj);

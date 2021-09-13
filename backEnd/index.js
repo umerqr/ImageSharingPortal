@@ -8,9 +8,6 @@ const healthyFunction = (req, res) =>
   res.json({
     healthy: true,
   });
-let corsOptions = {
-  origin: 'http://localhost:8081',
-};
 
 // app.use(cors(corsOptions));
 app.use((req, res, next) => {
