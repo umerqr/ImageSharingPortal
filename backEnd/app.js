@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const routes = require(`./routes`);
 const app = express();
+require('dotenv').config();
 const healthyFunction = (req, res) =>
   res.json({
     healthy: true,
