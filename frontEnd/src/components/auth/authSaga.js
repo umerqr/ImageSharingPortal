@@ -5,7 +5,7 @@ import { loginError, loginSuccess } from './actions';
 import { DEFAULT_CONST, FETCH_USER_INFO } from './constants';
 
 export function* loginFunction({ payload }) {
-  const requestURL = `http://localhost:8080/api/login`;
+  const requestURL = `https://image-share-portal.herokuapp.com/api/login`;
   const { email, password } = payload;
   const loginData = {
     email,
@@ -29,7 +29,7 @@ export function* loginFunction({ payload }) {
   }
 }
 export function* fetchUserInfo() {
-  const requestURL = `http://localhost:8080/api/fetchUserInfo`;
+  const requestURL = `https://image-share-portal.herokuapp.com/api/fetchUserInfo`;
   try {
     const response = yield call(getUtil, requestURL);
     if (response.status === 200) {

@@ -16,7 +16,7 @@ import {
 } from './constants';
 
 export function* fetchListData({ payload }) {
-  const requestURL = `http://localhost:8080/api/imageData`;
+  const requestURL = `https://image-share-portal.herokuapp.com/api/imageData`;
   try {
     const response = yield call(getUtil, requestURL);
     if (response.status === 200) {
@@ -28,7 +28,7 @@ export function* fetchListData({ payload }) {
   }
 }
 export function* fetchUserListData({ payload }) {
-  const requestURL = `http://localhost:8080/api/fetchUserData`;
+  const requestURL = `https://image-share-portal.herokuapp.com/api/fetchUserData`;
   try {
     const response = yield call(getUtil, requestURL);
     if (response.status === 200) {
@@ -40,7 +40,7 @@ export function* fetchUserListData({ payload }) {
   }
 }
 export function* postUserListData({ payload }) {
-  const requestURL = `http://localhost:8080/api/postUserImage`;
+  const requestURL = `https://image-share-portal.herokuapp.com/api/postUserImage`;
   console.log(payload, `payload`);
   const postObj = { items: payload };
   try {
