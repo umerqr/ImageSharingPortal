@@ -9,10 +9,10 @@ import {
   fetchUserListDataAction,
   postListDataAction,
 } from './actions';
-import AppLabel from '../AppLabel';
-import { AuthContext } from '../auth/authContext';
-const AppButton = lazy(() => import(`../AppButton`));
-const AppPopper = lazy(() => import(`../AppPopper`));
+import AppLabel from '../../components/AppLabel';
+import { AuthContext } from '../../components/auth/authContext';
+const AppButton = lazy(() => import(`../../components/AppButton`));
+const AppPopper = lazy(() => import(`../../components/AppPopper`));
 
 const grid = 8;
 
