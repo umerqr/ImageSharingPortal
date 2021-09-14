@@ -22,15 +22,18 @@
   margin-top: 30px;
 }
 
-.drawer-close {
-  width: 140px !important;
+.side-drawer > div {
+  overflow: hidden;
+  margin-top: 48px;
+}
+.drawer-close > div {
+  transition: all 0.3s ease-in-out !important;
+  width: 60px;
 }
 
-.drawer-close > div {
-  overflow: visible;
-  width: 60px;
-  margin-top: 48px;
-  /* background-color: rgb(86, 100, 210); */
+.drawer-open > div {
+  width: 160px;
+  transition: all 0.3s ease-in-out !important;
 }
 
 .main-container {
@@ -44,4 +47,13 @@
   overflow: auto;
   max-height: 100vh;
   padding-bottom: 60px;
+  transition: all 0.3s ease-in-out !important;
+}
+.homepage-container-open {
+  margin-left: 170px;
+  padding-right: 30px;
+  overflow: auto;
+  max-height: 100vh;
+  padding-bottom: 60px;
+  transition: all 0.3s ease-in-out !important;
 }

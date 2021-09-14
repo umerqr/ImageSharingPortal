@@ -13,7 +13,10 @@ import { AuthContext } from '../../containers/auth/authContext';
 import AppLabel from '../AppLabel';
 import AppCustomToolTipComp from '../AppCustomToolTipComp';
 import { logout } from '../../utils/images';
+import { MenuOutlined } from '@ant-design/icons';
+
 function TopBar(props) {
+  const { menuToggleHandler } = props;
   const authState = useContext(AuthContext);
   const [anchorEl, setAnchorEl] = useState(null);
   const handleClick = (stateToUpdate, event) => {
@@ -26,6 +29,7 @@ function TopBar(props) {
   return (
     <AppBar position='static' className='top-bar-container'>
       <Toolbar variant='dense'>
+        <MenuOutlined onClick={() => menuToggleHandler()} />
         <div className='top-bar-dropdowns-container'>
           <div className='d-flex'></div>
         </div>

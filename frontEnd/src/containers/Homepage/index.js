@@ -1,5 +1,5 @@
 import { Drawer } from '@material-ui/core';
-import React, { lazy } from 'react';
+import React, { lazy, useState } from 'react';
 import { Suspense } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import TopBar from '../../components/TopBar';
@@ -16,20 +16,29 @@ const ContentHomepage = lazy(() => import(`../ContentHomepage`));
 
 function Homepage(props) {
   //   const {} = props;
+  const drawerItems = [{ label: 'Dashboard', id: 0 }];
+  const [isDrawerOpen, setIsDrawerOpen] = useState(true);
   const list = () => (
     <div role='presentation'>
       <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem button key={text}>
+        {drawerItems.map((item, index) => (
+          <ListItem button key={item.id}>
             <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+              {index % 2 === 0 ? (
+                <span>
+                  <InboxIcon></InboxIcon>
+                  {isDrawerOpen && item.label}
+                </span>
+              ) : (
+                <MailIcon />
+              )}
             </ListItemIcon>
           </ListItem>
         ))}
       </List>
       <Divider />
       <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
+        {['All mail'].map((text, index) => (
           <ListItem button key={text}>
             <ListItemIcon>
               {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
@@ -41,12 +50,22 @@ function Homepage(props) {
   );
   return (
     <div className='main-container'>
-      <TopBar />
+      <TopBar menuToggleHandler={() => setIsDrawerOpen(!isDrawerOpen)} />
       <hr className='m-0'></hr>
-      <Drawer variant='permanent' open={false} className={`drawer-close`}>
+      <Drawer
+        variant='permanent'
+        open={isDrawerOpen}
+        className={
+          isDrawerOpen ? `side-drawer drawer-open` : `side-drawer drawer-close`
+        }
+      >
         {list()}
       </Drawer>
-      <div className='homepage-container'>
+      <div
+        className={
+          isDrawerOpen ? `homepage-container-open` : 'homepage-container'
+        }
+      >
         <Switch>
           <Suspense fallback={<div>Loading...</div>}>
             <Route path='/homepage' component={ContentHomepage} />
