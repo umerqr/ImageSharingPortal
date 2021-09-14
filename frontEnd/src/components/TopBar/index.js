@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import {
   AppBar,
   Avatar,
@@ -13,7 +13,10 @@ import { AuthContext } from '../../containers/auth/authContext';
 import AppLabel from '../AppLabel';
 import AppCustomToolTipComp from '../AppCustomToolTipComp';
 import { logout } from '../../utils/images';
+import { MenuOutlined } from '@ant-design/icons';
+
 function TopBar(props) {
+  const { menuToggleHandler } = props;
   const authState = useContext(AuthContext);
   const [anchorEl, setAnchorEl] = useState(null);
   const handleClick = (stateToUpdate, event) => {
@@ -26,6 +29,7 @@ function TopBar(props) {
   return (
     <AppBar position='static' className='top-bar-container'>
       <Toolbar variant='dense'>
+        <MenuOutlined onClick={() => menuToggleHandler()} />
         <div className='top-bar-dropdowns-container'>
           <div className='d-flex'></div>
         </div>
@@ -36,7 +40,7 @@ function TopBar(props) {
           onClick={(e) => handleClick(setAnchorEl, e)}
           className='profile-icon-image-button-nav'
         >
-          <AppCustomToolTipComp placement='bottom' title={emailInitials}>
+          <AppCustomToolTipComp placement='bottom' title={emailInitials || ''}>
             <Avatar alt={emailInitials} className='nav-profile-avatar-styling'>
               {emailInitials && emailInitials.charAt(0).toUpperCase()}
             </Avatar>
@@ -62,7 +66,7 @@ function TopBar(props) {
             >
               <AppLabel label='User:' className='nav-org-label' />
               <AppLabel
-                label={authState.user.name}
+                label={authState.user?.name || ''}
                 className='ml-0 pl-0 nav-org-sub-label'
               />
             </MenuItem>
@@ -81,6 +85,8 @@ function TopBar(props) {
   );
 }
 
-TopBar.propTypes = {};
+TopBar.propTypes = {
+  menuToggleHandler: PropTypes.func,
+};
 
 export default TopBar;

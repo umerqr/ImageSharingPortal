@@ -41,7 +41,6 @@ const Auth = (props) => {
     } else if (userInfo) {
       handleAuthentication(userInfo);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [incomingToken, userInfo]);
 
   useEffect(() => {
@@ -58,7 +57,6 @@ const Auth = (props) => {
         authenticated: true,
       });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleAuthentication = (user) => {

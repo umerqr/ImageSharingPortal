@@ -1,5 +1,5 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { Popper } from '@material-ui/core';
 import './styles.css';
 function AppPopper(props) {
@@ -17,11 +17,15 @@ function AppPopper(props) {
       placement='bottom'
       transition={true}
     >
-      <img src={subItem} alt='t' className='preview-styling' />
+      <div>Image ID: {subItem}</div>
     </Popper>
   );
 }
 
-AppPopper.propTypes = {};
+AppPopper.propTypes = {
+  anchorEl: PropTypes.any,
+  handleMouseLeave: PropTypes.func,
+  subItem: PropTypes.any,
+};
 
 export default AppPopper;

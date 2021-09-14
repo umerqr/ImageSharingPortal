@@ -46,6 +46,7 @@ AppButton.propTypes = {
   disabled: PropTypes.bool,
   label: PropTypes.string,
   appButtonLabelClassName: PropTypes.string,
+  src: PropTypes.string,
 };
 
 export default AppButton;

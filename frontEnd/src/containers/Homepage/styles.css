@@ -22,15 +22,18 @@
   margin-top: 30px;
 }
 
-.drawer-close {
-  width: 140px !important;
+.side-drawer > div {
+  overflow: hidden;
+  margin-top: 48px;
+}
+.drawer-close > div {
+  transition: all 0.3s ease-in-out !important;
+  width: 60px;
 }
 
-.drawer-close > div {
-  overflow: visible;
-  width: 60px;
-  margin-top: 48px;
-  /* background-color: rgb(86, 100, 210); */
+.drawer-open > div {
+  width: 160px;
+  transition: all 0.3s ease-in-out !important;
 }
 
 .main-container {
@@ -44,4 +47,63 @@
   overflow: auto;
   max-height: 100vh;
   padding-bottom: 60px;
+  transition: all 0.3s ease-in-out !important;
+}
+.homepage-container-open {
+  margin-left: 170px;
+  padding-right: 30px;
+  overflow: auto;
+  max-height: 100vh;
+  padding-bottom: 60px;
+  transition: all 0.3s ease-in-out !important;
+}
+.list-item-container {
+  flex-direction: row !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 10px 20px !important;
+  cursor: pointer;
+}
+.list-item-selected {
+  background-color: rgb(231, 233, 243) !important;
+  border-left: 3px solid rgb(86, 100, 210) !important;
+  padding-left: 15px !important;
+}
+.list-item-container:hover .drawer-list-label {
+  color: rgb(86, 100, 210) !important;
+}
+.drawer-list-label {
+  font-size: 16px !important;
+  font-weight: 500 !important;
+  color: #666666 !important;
+  font-family: 'Catamaran', sans-serif !important;
+}
+
+.drawer-list-label-selected {
+  font-size: 16px !important;
+  font-weight: 500 !important;
+  color: rgb(86, 100, 210) !important;
+  font-family: 'Catamaran', sans-serif !important;
+}
+.drawer-list-label-selected.MuiListItem-root {
+  background-color: rgba(252, 230, 230, 0.6) !important;
+  border-left: 3px solid rgb(86, 100, 210) !important;
+}
+
+.drawer-list-label-selected .MuiListItemText-root span {
+  background-color: rgba(252, 230, 230, 0.6) !important;
+}
+.drawer-label-icon svg {
+  max-width: 16px;
+  margin-top: 0px !important;
+  padding-top: 0px !important;
+}
+.list-item-container:hover .drawer-label-icon svg {
+  filter: invert(40%) sepia(11%) saturate(5023%) hue-rotate(204deg)
+    brightness(95%) contrast(87%);
+}
+.list-item-selected .drawer-label-icon svg {
+  filter: invert(40%) sepia(11%) saturate(5023%) hue-rotate(204deg)
+    brightness(95%) contrast(87%);
 }
