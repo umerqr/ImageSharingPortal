@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import {
   AppBar,
   Avatar,
@@ -40,7 +40,7 @@ function TopBar(props) {
           onClick={(e) => handleClick(setAnchorEl, e)}
           className='profile-icon-image-button-nav'
         >
-          <AppCustomToolTipComp placement='bottom' title={emailInitials}>
+          <AppCustomToolTipComp placement='bottom' title={emailInitials || ''}>
             <Avatar alt={emailInitials} className='nav-profile-avatar-styling'>
               {emailInitials && emailInitials.charAt(0).toUpperCase()}
             </Avatar>
@@ -66,7 +66,7 @@ function TopBar(props) {
             >
               <AppLabel label='User:' className='nav-org-label' />
               <AppLabel
-                label={authState.user.name}
+                label={authState.user?.name || ''}
                 className='ml-0 pl-0 nav-org-sub-label'
               />
             </MenuItem>
@@ -85,6 +85,8 @@ function TopBar(props) {
   );
 }
 
-TopBar.propTypes = {};
+TopBar.propTypes = {
+  menuToggleHandler: PropTypes.func,
+};
 
 export default TopBar;

@@ -1,0 +1,16 @@
+{
+  "name": "image-sharing-portal",
+  "version": "0.1.0",
+  "scripts": {
+    "eslint": "eslint",
+    "fix": "eslint --fix --quiet",
+    "install:fe": "cd frontEnd && yarn install",
+    "install:be": "cd backEnd && yarn install"
+  },
+  "private": true,
+  "release": {
+    "branch": "master",
+    "getLastRelease": "last-release-git",
+    "repositoryUrl": "https://github.com/umerqr/ImageSharingPortal"
+  }
+}

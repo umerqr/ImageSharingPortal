@@ -14,7 +14,7 @@ const ContentHomepage = lazy(() => import(`../ContentHomepage`));
 // const NotFoundPage = lazy(() => import(`../NotFoundPage`));
 // import PropTypes from 'prop-types';
 
-function Homepage(props) {
+function Homepage() {
   //   const {} = props;
   const drawerItems = [{ label: 'Dashboard', id: 0 }];
   const [isDrawerOpen, setIsDrawerOpen] = useState(true);

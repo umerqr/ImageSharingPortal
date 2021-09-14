@@ -1,5 +1,5 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { Popper } from '@material-ui/core';
 import './styles.css';
 function AppPopper(props) {
@@ -22,6 +22,10 @@ function AppPopper(props) {
   );
 }
 
-AppPopper.propTypes = {};
+AppPopper.propTypes = {
+  anchorEl: PropTypes.any,
+  handleMouseLeave: PropTypes.func,
+  subItem: PropTypes.any,
+};
 
 export default AppPopper;

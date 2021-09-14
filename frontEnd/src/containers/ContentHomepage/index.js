@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { lazy, useContext, useEffect, useState } from 'react';
 // import PropTypes from 'prop-types';
 import './styles.css';
@@ -20,7 +19,7 @@ import {
 const AppButton = lazy(() => import(`../../components/AppButton`));
 const AppPopper = lazy(() => import(`../../components/AppPopper`));
 
-function ContentHomepage(props) {
+function ContentHomepage() {
   const [showAddArea, setShowAddArea] = useState(false);
   const [activeImage, setActiveImage] = useState(``);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -160,8 +159,8 @@ function ContentHomepage(props) {
                       >
                         <img
                           className='array-image-styling'
-                          key={item.id}
-                          src={item.url}
+                          key={item?.id}
+                          src={item?.url}
                           alt='I'
                           onMouseLeave={() => handleMouseLeave()}
                           onMouseEnter={(e) => handleMouseEnter(e, item.id)}

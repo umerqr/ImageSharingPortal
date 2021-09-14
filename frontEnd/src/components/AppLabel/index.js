@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 import './styles.css';
 
-const AppLabel = ({ className, label, onClick }) => {
+const AppLabel = ({ className, label = '', onClick }) => {
   return (
     <Typography
       onClick={onClick}

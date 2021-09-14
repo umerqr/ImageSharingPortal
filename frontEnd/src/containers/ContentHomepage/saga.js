@@ -15,7 +15,7 @@ import {
   POST_USER_LIST_DATA,
 } from './constants';
 
-export function* fetchListData({ payload }) {
+export function* fetchListData() {
   const requestURL = `/api/imageData`;
   try {
     const response = yield call(getUtil, requestURL);
@@ -27,7 +27,7 @@ export function* fetchListData({ payload }) {
     yield put(fetchListDataError(err));
   }
 }
-export function* fetchUserListData({ payload }) {
+export function* fetchUserListData() {
   const requestURL = `/api/fetchUserData`;
   try {
     const response = yield call(getUtil, requestURL);
