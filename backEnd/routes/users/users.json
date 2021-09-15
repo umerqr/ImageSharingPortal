@@ -1,26 +1,42 @@
 [{
-    "balance": "$3,946.45",
-    "picture": "http://placehold.it/32x32",
-    "age": 23,
-    "name": "Bird Ramsey",
-    "gender": "male",
-    "company": "NIMON",
-    "email": "abc@gmail.com",
-    "password": "123123"
-}, {
-    "balance": "$2,499.49",
-    "picture": "http://placehold.it/32x32",
-    "age": 31,
-    "name": "Lillian Burgess",
-    "gender": "female",
-    "email": "qwe@gmail.com",
-    "password": "123123"
-}, {
-    "balance": "$2,820.18",
-    "picture": "http://placehold.it/32x32",
-    "age": 34,
-    "name": "Kristie Cole",
-    "gender": "female",
-    "email": "asd@gmail.com",
-    "password": "123123"
-}]
+        "balance": "$3,946.45",
+        "picture": "https://i.kinja-img.com/gawker-media/image/upload/t_original/ijsi5fzb1nbkbhxa2gc1.png",
+        "age": 23,
+        "name": "Bird Ramsey",
+        "gender": "male",
+        "company": "NIMON",
+        "email": "abc@gmail.com",
+        "password": "123123",
+        "roles": ["dashboard", "users", "library"]
+    }, {
+        "balance": "$2,499.49",
+        "picture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCLwGMHsRYHfuX4z5vVaon0stgix_Huc0gnDAT1q7NyxamRcGgDK_NtkEu8n-4O2akHFk&usqp=CAU",
+        "age": 31,
+        "name": "Lillian Burgess",
+        "gender": "female",
+        "email": "qwe@gmail.com",
+        "password": "123123",
+        "roles": ["dashboard", "users"]
+
+    }, {
+        "balance": "$2,820.18",
+        "picture": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwkefrcDz6r7WHneUKM4X7TJJrwODZREVDi_MTYJo3Hvh_RI7AxFV9ea5Xwzumf0As7Y4&usqp=CAU",
+        "age": 34,
+        "name": "Kristie Cole",
+        "gender": "female",
+        "email": "asd@gmail.com",
+        "password": "123123",
+        "roles": ["dashboard", "library"]
+    },
+    {
+        "balance": "$3,946.45",
+        "picture": "https://www.nj.com/resizer/zovGSasCaR41h_yUGYHXbVTQW2A=/1280x0/smart/cloudfront-us-east-1.images.arcpublishing.com/advancelocal/SJGKVE5UNVESVCW7BBOHKQCZVE.jpg",
+        "age": 27,
+        "name": "Admin",
+        "gender": "male",
+        "company": "NIMON",
+        "email": "admin@gmail.com",
+        "password": "123qwe",
+        "roles": ["dashboard", "users", "library"]
+    }
+]

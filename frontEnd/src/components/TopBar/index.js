@@ -12,11 +12,11 @@ import './styles.css';
 import { AuthContext } from '../../containers/auth/authContext';
 import AppLabel from '../AppLabel';
 import AppCustomToolTipComp from '../AppCustomToolTipComp';
-import { logout } from '../../utils/images';
+import { logout, profile } from '../../utils/images';
 import { MenuOutlined } from '@ant-design/icons';
 
 function TopBar(props) {
-  const { menuToggleHandler } = props;
+  const { menuToggleHandler, onClickDrawerItem } = props;
   const authState = useContext(AuthContext);
   const [anchorEl, setAnchorEl] = useState(null);
   const handleClick = (stateToUpdate, event) => {
@@ -41,9 +41,11 @@ function TopBar(props) {
           className='profile-icon-image-button-nav'
         >
           <AppCustomToolTipComp placement='bottom' title={emailInitials || ''}>
-            <Avatar alt={emailInitials} className='nav-profile-avatar-styling'>
-              {emailInitials && emailInitials.charAt(0).toUpperCase()}
-            </Avatar>
+            <Avatar
+              alt={emailInitials && emailInitials.charAt(0).toUpperCase()}
+              className='nav-profile-avatar-styling'
+              src={authState.user?.picture}
+            />
           </AppCustomToolTipComp>
         </IconButton>
         <Menu
@@ -73,6 +75,16 @@ function TopBar(props) {
             <hr className='m-0' />
             <MenuItem
               className='nav-action-menu-item'
+              onClick={() => {
+                onClickDrawerItem({ label: 'Profile' });
+                handleClose(setAnchorEl);
+              }}
+            >
+              <img src={profile} alt='/' className='nav-action-icon' />
+              <AppLabel label='Profile' className='nav-action-label' />
+            </MenuItem>
+            <MenuItem
+              className='nav-action-menu-item'
               onClick={() => authState.logout()}
             >
               <img src={logout} alt='/' className='nav-action-icon' />
@@ -87,6 +99,7 @@ function TopBar(props) {
 
 TopBar.propTypes = {
   menuToggleHandler: PropTypes.func,
+  onClickDrawerItem: PropTypes.func,
 };
 
 export default TopBar;

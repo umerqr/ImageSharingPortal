@@ -38,7 +38,7 @@ const Auth = (props) => {
       if (userInfo) {
         handleAuthentication(userInfo);
       }
-    } else if (userInfo) {
+    } else {
       handleAuthentication(userInfo);
     }
   }, [incomingToken, userInfo]);

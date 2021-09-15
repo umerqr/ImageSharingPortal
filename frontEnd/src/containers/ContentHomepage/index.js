@@ -1,4 +1,4 @@
-import React, { lazy, useContext, useEffect, useState } from 'react';
+import React, { lazy, useEffect, useState } from 'react';
 // import PropTypes from 'prop-types';
 import './styles.css';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
@@ -9,7 +9,6 @@ import {
   postListDataAction,
 } from './actions';
 import AppLabel from '../../components/AppLabel';
-import { AuthContext } from '../../containers/auth/authContext';
 import {
   getItemStyle,
   getListStyle,
@@ -26,8 +25,6 @@ function ContentHomepage() {
   const contentHomepageReducer = useSelector(
     (state) => state.contentHomepageReducer
   );
-
-  const auth = useContext(AuthContext);
   const { listData, userListData } = contentHomepageReducer;
   const dispatch = useDispatch();
   const [draggableState, setDraggableState] = useState({
@@ -106,12 +103,6 @@ function ContentHomepage() {
   };
   return (
     <>
-      <div className='d-flex justify-content-center'>
-        <AppLabel
-          className='welcome-label-styling'
-          label={`Welcome to the Image Portal ${auth.user.name}`}
-        />
-      </div>
       <div className='d-flex justify-content-end'>
         <div>
           <AppButton

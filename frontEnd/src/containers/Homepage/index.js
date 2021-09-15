@@ -13,7 +13,14 @@ import {
   DashboardOutlined,
   UserOutlined,
 } from '@ant-design/icons';
+import { logoTransparent } from '../../utils/images';
+// import ContentSkeleton from '../ContentHomepage/skeleton';
+import ProtectedRoute from '../../components/ProtectedRoute';
+
 const ContentHomepage = lazy(() => import(`../ContentHomepage`));
+const Library = lazy(() => import(`../Library`));
+const Profile = lazy(() => import(`../Profile`));
+const Users = lazy(() => import(`../Users`));
 // const NotFoundPage = lazy(() => import(`../NotFoundPage`));
 // import PropTypes from 'prop-types';
 
@@ -34,11 +41,14 @@ function Homepage() {
   let history = useHistory();
 
   useEffect(() => {
-    switch (location) {
+    switch (location.pathname) {
+      case `/Dashboard`:
       case `/`:
+      case ``:
         setSelectedDrawerItem('Dashboard');
         break;
       default:
+        setSelectedDrawerItem(location.pathname.replace('/', ''));
         break;
     }
   }, []);
@@ -82,12 +92,14 @@ function Homepage() {
           </ListItem>
         ))}
       </List>
-      <Divider />
     </div>
   );
   return (
     <div className='main-container'>
-      <TopBar menuToggleHandler={() => setIsDrawerOpen(!isDrawerOpen)} />
+      <TopBar
+        menuToggleHandler={() => setIsDrawerOpen(!isDrawerOpen)}
+        onClickDrawerItem={onClickDrawerItem}
+      />
       <hr className='m-0'></hr>
       <Drawer
         variant='permanent'
@@ -96,6 +108,14 @@ function Homepage() {
           isDrawerOpen ? `side-drawer drawer-open` : `side-drawer drawer-close`
         }
       >
+        <span className='d-flex justify-content-center'>
+          <img
+            src={logoTransparent}
+            alt='/'
+            className={isDrawerOpen ? 'logo-styling' : 'closed-logo-styling'}
+          />
+        </span>
+        <Divider />
         {list()}
       </Drawer>
       <div
@@ -105,8 +125,28 @@ function Homepage() {
       >
         <Switch>
           <Suspense fallback={<div>Loading...</div>}>
-            <Route path='/dashboard' component={ContentHomepage} />
-            <Route exact path='/' component={ContentHomepage} />
+            <ProtectedRoute
+              path='/dashboard'
+              name='dashboard'
+              component={ContentHomepage}
+              // render={(props) => (
+              //   <Suspense fallback={<ContentSkeleton />}>
+              //     <ContentHomepage {...props} />
+              //   </Suspense>
+              // )}
+            />
+            {/* <Route
+              exact
+              path='/'
+              render={(props) => (
+                <Suspense fallback={<ContentSkeleton />}>
+                  <ContentHomepage {...props} />
+                </Suspense>
+              )}
+            /> */}
+            <Route path='/profile' render={(props) => <Profile {...props} />} />
+            <Route path='/users' render={(props) => <Users {...props} />} />
+            <Route path='/library' render={(props) => <Library {...props} />} />
           </Suspense>
         </Switch>
       </div>
