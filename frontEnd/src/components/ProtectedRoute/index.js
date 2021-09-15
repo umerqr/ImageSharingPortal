@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 // import styled from 'styled-components';
 import { Redirect, Route } from 'react-router-dom';
 import { AuthContext } from '../../containers/auth/authContext';
-const ProtectedRoute = ({ component: Component, name, ...rest }) => {
+const ProtectedRoute = ({ render: Component, name, ...rest }) => {
   const auth = useContext(AuthContext);
   const { user } = auth;
   const roles = user?.roles;
@@ -43,7 +43,7 @@ const ProtectedRoute = ({ component: Component, name, ...rest }) => {
 };
 
 ProtectedRoute.propTypes = {
-  component: PropTypes.any,
+  render: PropTypes.any,
   name: PropTypes.string,
 };
 
