@@ -14,7 +14,13 @@ import {
   UserOutlined,
 } from '@ant-design/icons';
 import { logoTransparent } from '../../utils/images';
+// import ContentSkeleton from '../ContentHomepage/skeleton';
+import ProtectedRoute from '../../components/ProtectedRoute';
+
 const ContentHomepage = lazy(() => import(`../ContentHomepage`));
+const Library = lazy(() => import(`../Library`));
+const Profile = lazy(() => import(`../Profile`));
+const Users = lazy(() => import(`../Users`));
 // const NotFoundPage = lazy(() => import(`../NotFoundPage`));
 // import PropTypes from 'prop-types';
 
@@ -119,8 +125,28 @@ function Homepage() {
       >
         <Switch>
           <Suspense fallback={<div>Loading...</div>}>
-            <Route path='/dashboard' component={ContentHomepage} />
-            <Route exact path='/' component={ContentHomepage} />
+            <ProtectedRoute
+              path='/dashboard'
+              name='dashboard'
+              component={ContentHomepage}
+              // render={(props) => (
+              //   <Suspense fallback={<ContentSkeleton />}>
+              //     <ContentHomepage {...props} />
+              //   </Suspense>
+              // )}
+            />
+            {/* <Route
+              exact
+              path='/'
+              render={(props) => (
+                <Suspense fallback={<ContentSkeleton />}>
+                  <ContentHomepage {...props} />
+                </Suspense>
+              )}
+            /> */}
+            <Route path='/profile' render={(props) => <Profile {...props} />} />
+            <Route path='/users' render={(props) => <Users {...props} />} />
+            <Route path='/library' render={(props) => <Library {...props} />} />
           </Suspense>
         </Switch>
       </div>

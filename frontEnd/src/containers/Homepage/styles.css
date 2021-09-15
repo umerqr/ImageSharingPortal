@@ -120,3 +120,8 @@
     brightness(95%) contrast(87%);
   transition: all 0.2s ease-in-out !important;
 }
+.skeleton-container{
+  width: 100%;
+  margin-top: -30px !important;
+  height:100% !important;
+}
