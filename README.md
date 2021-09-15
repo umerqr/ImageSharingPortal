@@ -8,6 +8,9 @@ P.s there's always room for improvement
 # Link to website: https://nostalgic-shaw-da77cc.netlify.app/
 Users to test with:
 
+email: admin@gmail.com (WITH ALL PERMISSIONS)
+password: 123qwe
+
 email: abc@gmail.com
 password: 123123
 
