@@ -27,13 +27,13 @@
   margin-top: 48px;
 }
 .drawer-close > div {
-  transition: all 0.3s ease-in-out !important;
+  transition: all 0.2s ease-in-out !important;
   width: 60px;
 }
 
 .drawer-open > div {
   width: 160px;
-  transition: all 0.3s ease-in-out !important;
+  transition: all 0.2s ease-in-out !important;
 }
 
 .main-container {
@@ -47,7 +47,7 @@
   overflow: auto;
   max-height: 100vh;
   padding-bottom: 60px;
-  transition: all 0.3s ease-in-out !important;
+  transition: all 0.2s ease-in-out !important;
 }
 .homepage-container-open {
   margin-left: 170px;
@@ -55,7 +55,7 @@
   overflow: auto;
   max-height: 100vh;
   padding-bottom: 60px;
-  transition: all 0.3s ease-in-out !important;
+  transition: all 0.2s ease-in-out !important;
 }
 .list-item-container {
   flex-direction: row !important;
@@ -96,8 +96,7 @@
 }
 .drawer-label-icon svg {
   max-width: 16px;
-  margin-top: 0px !important;
-  padding-top: 0px !important;
+  margin-bottom: 6px !important;
 }
 .list-item-container:hover .drawer-label-icon svg {
   filter: invert(40%) sepia(11%) saturate(5023%) hue-rotate(204deg)
@@ -106,4 +105,18 @@
 .list-item-selected .drawer-label-icon svg {
   filter: invert(40%) sepia(11%) saturate(5023%) hue-rotate(204deg)
     brightness(95%) contrast(87%);
+}
+.logo-styling {
+  max-height: 100px;
+  max-width: 100px;
+  filter: invert(40%) sepia(11%) saturate(5023%) hue-rotate(204deg)
+    brightness(95%) contrast(87%);
+  transition: all 0.2s ease-in-out !important;
+}
+.closed-logo-styling {
+  max-height: 50px;
+  max-width: 50px;
+  filter: invert(40%) sepia(11%) saturate(5023%) hue-rotate(204deg)
+    brightness(95%) contrast(87%);
+  transition: all 0.2s ease-in-out !important;
 }

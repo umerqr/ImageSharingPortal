@@ -46,6 +46,9 @@ axios.interceptors.response.use(
   (response) => response,
   async (error) => {
     let errorMsg = {};
+    if (error.response && error.response.status === 401) {
+      localStorage.clear();
+    }
     if (
       error.response.status === 401 ||
       error.response.status === 400 ||

@@ -13,6 +13,7 @@ import {
   DashboardOutlined,
   UserOutlined,
 } from '@ant-design/icons';
+import { logoTransparent } from '../../utils/images';
 const ContentHomepage = lazy(() => import(`../ContentHomepage`));
 // const NotFoundPage = lazy(() => import(`../NotFoundPage`));
 // import PropTypes from 'prop-types';
@@ -34,11 +35,14 @@ function Homepage() {
   let history = useHistory();
 
   useEffect(() => {
-    switch (location) {
+    switch (location.pathname) {
+      case `/Dashboard`:
       case `/`:
+      case ``:
         setSelectedDrawerItem('Dashboard');
         break;
       default:
+        setSelectedDrawerItem(location.pathname.replace('/', ''));
         break;
     }
   }, []);
@@ -82,12 +86,14 @@ function Homepage() {
           </ListItem>
         ))}
       </List>
-      <Divider />
     </div>
   );
   return (
     <div className='main-container'>
-      <TopBar menuToggleHandler={() => setIsDrawerOpen(!isDrawerOpen)} />
+      <TopBar
+        menuToggleHandler={() => setIsDrawerOpen(!isDrawerOpen)}
+        onClickDrawerItem={onClickDrawerItem}
+      />
       <hr className='m-0'></hr>
       <Drawer
         variant='permanent'
@@ -96,6 +102,14 @@ function Homepage() {
           isDrawerOpen ? `side-drawer drawer-open` : `side-drawer drawer-close`
         }
       >
+        <span className='d-flex justify-content-center'>
+          <img
+            src={logoTransparent}
+            alt='/'
+            className={isDrawerOpen ? 'logo-styling' : 'closed-logo-styling'}
+          />
+        </span>
+        <Divider />
         {list()}
       </Drawer>
       <div
