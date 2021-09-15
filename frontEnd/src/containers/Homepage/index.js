@@ -1,5 +1,5 @@
 import { Drawer } from '@material-ui/core';
-import React, { lazy, useEffect, useState } from 'react';
+import React, { lazy, useContext, useEffect, useState } from 'react';
 import { Suspense } from 'react';
 import { Route, Switch, useLocation, useHistory } from 'react-router-dom';
 import TopBar from '../../components/TopBar';
@@ -14,8 +14,11 @@ import {
   UserOutlined,
 } from '@ant-design/icons';
 import { logoTransparent } from '../../utils/images';
-// import ContentSkeleton from '../ContentHomepage/skeleton';
+import ContentSkeleton from '../ContentHomepage/skeleton';
 import ProtectedRoute from '../../components/ProtectedRoute';
+import { AuthContext } from '../auth/authContext';
+import LandingPage from '../../components/LandingPage';
+import NotFoundPage from '../../components/NotFoundPage';
 
 const ContentHomepage = lazy(() => import(`../ContentHomepage`));
 const Library = lazy(() => import(`../Library`));
@@ -26,6 +29,9 @@ const Users = lazy(() => import(`../Users`));
 
 function Homepage() {
   //   const {} = props;
+  const auth = useContext(AuthContext);
+  const { user } = auth;
+  const roles = user?.roles;
   const drawerItems = [
     {
       label: 'Dashboard',
@@ -43,8 +49,6 @@ function Homepage() {
   useEffect(() => {
     switch (location.pathname) {
       case `/Dashboard`:
-      case `/`:
-      case ``:
         setSelectedDrawerItem('Dashboard');
         break;
       default:
@@ -64,33 +68,37 @@ function Homepage() {
   const list = () => (
     <div role='presentation'>
       <List>
-        {drawerItems.map((item) => (
-          <ListItem
-            onClick={() => onClickDrawerItem(item)}
-            button
-            key={item.id}
-            alignItems='center'
-            className={
-              selectedDrawerItem === item.label
-                ? 'list-item-container list-item-selected '
-                : 'list-item-container'
-            }
-          >
-            <ListItemIcon>
-              <span>
-                <span className='drawer-label-icon'>{item.icon}</span>
-                <span
-                  className={`pl-1 drawer-list-label ${
-                    selectedDrawerItem === item.label &&
-                    'drawer-list-label-selected'
-                  }`}
-                >
-                  {isDrawerOpen && item.label}
+        {drawerItems
+          .filter((drawerItem) =>
+            roles?.includes(drawerItem.label?.toLowerCase())
+          )
+          .map((item) => (
+            <ListItem
+              onClick={() => onClickDrawerItem(item)}
+              button
+              key={item.id}
+              alignItems='center'
+              className={
+                selectedDrawerItem === item.label
+                  ? 'list-item-container list-item-selected '
+                  : 'list-item-container'
+              }
+            >
+              <ListItemIcon>
+                <span>
+                  <span className='drawer-label-icon'>{item.icon}</span>
+                  <span
+                    className={`pl-1 drawer-list-label ${
+                      selectedDrawerItem === item.label &&
+                      'drawer-list-label-selected'
+                    }`}
+                  >
+                    {isDrawerOpen && item.label}
+                  </span>
                 </span>
-              </span>
-            </ListItemIcon>
-          </ListItem>
-        ))}
+              </ListItemIcon>
+            </ListItem>
+          ))}
       </List>
     </div>
   );
@@ -128,25 +136,29 @@ function Homepage() {
             <ProtectedRoute
               path='/dashboard'
               name='dashboard'
-              component={ContentHomepage}
-              // render={(props) => (
-              //   <Suspense fallback={<ContentSkeleton />}>
-              //     <ContentHomepage {...props} />
-              //   </Suspense>
-              // )}
-            />
-            {/* <Route
-              exact
-              path='/'
               render={(props) => (
                 <Suspense fallback={<ContentSkeleton />}>
                   <ContentHomepage {...props} />
                 </Suspense>
               )}
-            /> */}
-            <Route path='/profile' render={(props) => <Profile {...props} />} />
-            <Route path='/users' render={(props) => <Users {...props} />} />
-            <Route path='/library' render={(props) => <Library {...props} />} />
+            />
+            <Route exact path='/' component={LandingPage} />
+            <Route path='/welcome' component={LandingPage} />
+            <Route name path='/profile' component={Profile} />
+            <ProtectedRoute
+              path='/users'
+              name='users'
+              // component={Users}
+
+              render={(props) => <Users {...props} />}
+            />
+            <ProtectedRoute
+              path='/library'
+              name='library'
+              component={Library}
+              render={(props) => <Library {...props} />}
+            />
+            <Route exact path='/notFound' component={NotFoundPage} />
           </Suspense>
         </Switch>
       </div>
