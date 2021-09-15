@@ -6,19 +6,23 @@ import { DEFAULT_CONST, FETCH_USER_INFO } from './constants';
 
 export function* loginFunction({ payload }) {
   const requestURL = `/api/login`;
-  const { email, password } = payload;
+  const { email, password } = payload.payload;
+  const { onSuccess } = payload;
   const loginData = {
     email,
     password,
   };
   try {
+    onSuccess(true);
     const response = yield call(postUtil, requestURL, loginData);
     if (response.status === 200) {
       const res = response;
       yield put(loginSuccess(res.data));
+      onSuccess(false);
       notificationWithIcon('success', `Successful`, `Logged In Successfully`);
     }
   } catch (err) {
+    onSuccess(false);
     notificationWithIcon(
       'error',
       `Error`,

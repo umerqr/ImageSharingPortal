@@ -25,8 +25,8 @@ const Auth = (props) => {
     });
   };
 
-  const handleLogin = (params) => {
-    dispatch(loginAction(params));
+  const handleLogin = (params, actionIncoming) => {
+    dispatch(loginAction({ payload: params, onSuccess: actionIncoming }));
   };
   useEffect(() => {
     if (incomingToken && incomingToken !== ``) {

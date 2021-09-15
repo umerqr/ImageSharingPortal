@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 // import PropTypes from 'prop-types';
 import AppButton from '../AppButton';
 import { Paper } from '@material-ui/core';
@@ -6,15 +6,19 @@ import './styles.css';
 import AppTextField from '../AppTextField';
 import { AuthContext } from '../../containers/auth/authContext';
 import { notificationWithIcon } from '../../utils/notification';
+import AppCircularProgress from '../AppCircularProgress';
+import { logoTransparent } from '../../utils/images';
+import { useHistory } from 'react-router-dom';
 
 export const isValidEmail = (email) => {
-  // eslint-disable-next-line
-  let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  let re =
+    // eslint-disable-next-line
+    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(String(email).toLowerCase());
 };
 
 export const isValidPassword = (password) => {
-  const pass = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+  const pass = /^.{6,}$/;
   return pass.test(password);
 };
 
@@ -22,33 +26,66 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMail, setErrorMail] = useState(false);
-
+  const [errorPassword, setErrorPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  let history = useHistory();
   function handleEmailChange(value, stateToUpdate) {
     stateToUpdate(value);
-    if (isValidEmail(value)) {
-      setErrorMail(false);
-    } else {
-      setErrorMail(true);
-    }
   }
+  useEffect(() => {
+    history.push('/');
+  }, []);
+  useEffect(() => {
+    if (email !== '') {
+      if (isValidEmail(email)) {
+        setErrorMail(false);
+      } else {
+        setErrorMail(true);
+      }
+    }
+    if (password !== '') {
+      if (isValidPassword(password)) {
+        setErrorPassword(false);
+      } else {
+        setErrorPassword(true);
+      }
+    }
+  }, [email, password]);
   const authState = useContext(AuthContext);
 
   const handleSignIn = async () => {
     const loginCredentials = { email, password };
     if (email === `` || password === ``) {
       notificationWithIcon('error', `Error`, `Please add in both fields`);
+      if (email === '') setErrorMail(true);
+      if (password === '') setErrorPassword(true);
     } else {
-      return authState.handleLogin(loginCredentials);
+      return authState.handleLogin(loginCredentials, setLoading);
     }
   };
-
+  const handleEnterKey = (event) => {
+    if (event.key === `Enter`) {
+      return handleSignIn();
+    } else return;
+  };
   return (
     <>
       <div className='login-container'>
-        <Paper className='login-inner-container' elevation={3}>
+        <Paper
+          className='login-inner-container'
+          onKeyDown={(event) => handleEnterKey(event)}
+          elevation={3}
+        >
           <div className='form-header'>
-            <h1 className='main-title'>Login to Image Portal App</h1>
-            {/* <p className='sub-title'>Login</p> */}
+            <span className='d-flex justify-content-center align-items-center'>
+              <img
+                src={logoTransparent}
+                alt='/'
+                className={'login-logo-styling'}
+              />
+              <h1 className='main-title'>Image Portal</h1>
+            </span>
+            <p className='sub-title'>Sign in below</p>
           </div>
           <div>
             <div>
@@ -80,14 +117,23 @@ const Login = () => {
                 stateToUpdate={setPassword}
               />
             </div>
+            {errorPassword ? (
+              <span className='error-text'>
+                Please enter a proper password.
+              </span>
+            ) : null}
           </div>
 
           <div className='d-flex align-items-end flex-column'>
-            <AppButton
-              className='btn-theme mb-2 mt-5'
-              onClick={handleSignIn}
-              label='Login'
-            ></AppButton>
+            {loading ? (
+              <AppCircularProgress />
+            ) : (
+              <AppButton
+                className='btn-theme mb-2 mt-5'
+                onClick={handleSignIn}
+                label='Login'
+              ></AppButton>
+            )}
           </div>
         </Paper>
       </div>
