@@ -40,6 +40,7 @@ export function* fetchUserInfo() {
       yield put(loginSuccess(res.data));
     }
   } catch (err) {
+    localStorage.clear();
     yield put(loginError(err));
   }
 }
