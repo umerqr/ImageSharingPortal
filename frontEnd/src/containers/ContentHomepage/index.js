@@ -38,6 +38,7 @@ function ContentHomepage() {
   }, []);
   useEffect(() => {
     if (userListData) {
+      console.log(userListData, 'userListData');
       setDraggableState({ ...draggableState, selected: userListData });
     }
   }, [userListData]);
@@ -137,7 +138,11 @@ function ContentHomepage() {
                   </div>
                 )}
                 {draggableState.selected.map((item, index) => (
-                  <Draggable key={item.id} draggableId={item.id} index={index}>
+                  <Draggable
+                    key={item._id}
+                    draggableId={item._id}
+                    index={index}
+                  >
                     {(provided, snapshot) => (
                       <div
                         ref={provided.innerRef}
@@ -154,7 +159,7 @@ function ContentHomepage() {
                           src={item?.url}
                           alt='I'
                           onMouseLeave={() => handleMouseLeave()}
-                          onMouseEnter={(e) => handleMouseEnter(e, item.id)}
+                          onMouseEnter={(e) => handleMouseEnter(e, item._id)}
                         />
                       </div>
                     )}
@@ -187,8 +192,8 @@ function ContentHomepage() {
                     )}
                     {draggableState.items.map((item, index) => (
                       <Draggable
-                        key={item.id}
-                        draggableId={item.id}
+                        key={item._id}
+                        draggableId={item._id}
                         index={index}
                       >
                         {(provided, snapshot) => (
@@ -203,11 +208,13 @@ function ContentHomepage() {
                           >
                             <img
                               className='array-image-styling'
-                              key={item.id}
+                              key={item._id}
                               src={item.url}
                               alt='I'
                               onMouseLeave={() => handleMouseLeave()}
-                              onMouseEnter={(e) => handleMouseEnter(e, item.id)}
+                              onMouseEnter={(e) =>
+                                handleMouseEnter(e, item._id)
+                              }
                             />
                           </div>
                         )}

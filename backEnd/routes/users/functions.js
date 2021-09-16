@@ -190,16 +190,21 @@ const fetchData = async (req, res) => {
       if (imageData) {
         userDataModel.findOne({ email: email }, async (err, dataFound) => {
           if (dataFound) {
-            const filtedData = dataFound.filter((x) => {
-              if (!imageData.some((y) => y.id === x.id)) {
+            const filteredData = imageData.filter((x) => {
+              if (
+                !dataFound.items.some((y) => {
+                  const yId = y._id.toString();
+                  const xId = x._id.toString();
+                  return yId === xId;
+                })
+              ) {
                 return x;
               }
             });
             responseObj = {
               status: 200,
               result: {
-                token,
-                userInfo: filtedData,
+                items: filteredData,
               },
             };
             res.status(responseObj.status).json(responseObj.result);
@@ -207,7 +212,6 @@ const fetchData = async (req, res) => {
             responseObj = {
               status: 200,
               result: {
-                token,
                 items: imageData,
               },
             };
@@ -215,7 +219,6 @@ const fetchData = async (req, res) => {
           }
         });
       } else {
-        console.log('did it come here?');
         responseObj = {
           status: 404,
           result: {
@@ -234,25 +237,40 @@ const fetchData = async (req, res) => {
         message: `Error, unable to perform action, Server error.`,
       },
     };
-    console.log(`error occured`);
-  } finally {
     res.status(responseObj.status).json(responseObj.result);
+    console.log(`error occured`);
   }
+  // finally {
+  //   res.status(responseObj.status).json(responseObj.result);
+  // }
 };
 const fetchUserData = async (req, res) => {
+  let responseObj = {};
   try {
     const { token } = req.headers;
     const fetchUserDataSubFunction = (authData) => {
-      const imageData = userImageDataset.find(
-        (x) => x.email === authData.user.email
+      userDataModel.findOne(
+        { email: authData.user.email },
+        (err, dataFound) => {
+          if (dataFound) {
+            responseObj = {
+              status: 200,
+              result: {
+                items: dataFound.items,
+              },
+            };
+            res.status(responseObj.status).json(responseObj.result);
+          } else {
+            responseObj = {
+              status: 200,
+              result: {
+                items: [],
+              },
+            };
+            res.status(responseObj.status).json(responseObj.result);
+          }
+        }
       );
-      if (imageData) {
-        res.json({
-          items: imageData.items,
-        });
-      } else {
-        res.sendStatus(404);
-      }
     };
     return middleWareForVerifyToken(token, fetchUserDataSubFunction);
   } catch (e) {
@@ -295,26 +313,47 @@ const fetchUserInfo = async (req, res) => {
 const postUserImage = async (req, res) => {
   let responseObj = {};
   const { token } = req.headers;
-  const { body } = req;
-  const { items } = body;
+  const postObj = req.body;
+
   try {
     const postUserImageSubFunction = (authData) => {
-      if (items) {
-        fs.readFile(
-          './routes/users/data.json',
-          'utf8',
-          function readFileCallback(err, data) {
-            if (err) {
-            } else {
-              let obj = JSON.parse(data); //now it an object
-              obj.find((x) => x.email === authData.user.email).items = items; //add some data
-              let json = JSON.stringify(obj); //convert it back to json
-              fs.writeFile('./routes/users/data.json', json, function (err) {
-                if (err) throw err;
-              }); // write it back
-            }
-          }
-        );
+      const newData = new userDataModel({
+        ...postObj,
+        email: authData.user.email,
+      });
+      if (newData) {
+        const options = { upsert: true, new: true, setDefaultsOnInsert: true };
+        userDataModel
+          .findOneAndUpdate(
+            { email: authData.user.email },
+            {
+              ...postObj,
+              email: authData.user.email,
+            },
+            options
+          )
+          .then(() => {
+            userDataModel.findOne(
+              { _id: newData._id },
+              async (err, dataFound) => {
+                if (dataFound) {
+                  responseObj = {
+                    status: 200,
+                    result: {
+                      updatedData: dataFound,
+                    },
+                  };
+                  res.status(responseObj.status).json(responseObj.result);
+                } else {
+                  responseObj = {
+                    status: 500,
+                    message: 'unexpected error occured',
+                  };
+                  res.status(responseObj.status).json(responseObj.result);
+                }
+              }
+            );
+          });
         responseObj = {
           status: 200,
           result: {
