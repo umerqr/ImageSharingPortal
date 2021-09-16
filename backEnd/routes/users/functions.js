@@ -3,7 +3,13 @@ const userImageDataset = require(`./data.json`);
 const imageDataset = require(`./availableData.json`);
 const jwt = require('jsonwebtoken');
 const fs = require('fs');
-
+const Users = require('./schema/users');
+const DataAvailable = require('./schema/availableData');
+const UserData = require('./schema/userData');
+// const mongoose = require('mongoose');
+const { userModel } = Users;
+const { availableDataModel } = DataAvailable;
+const { userDataModel } = UserData;
 const middleWareForVerifyToken = (incomingToken, incomingFunction) => {
   jwt.verify(incomingToken, 'secretkey', (err, authData) => {
     if (err) {
@@ -30,30 +36,32 @@ const fetchUser = async (req, res) => {
   try {
     const { body } = req;
     const { email, password } = body;
-    const users = userDataset.find(
-      (x) => x.email === email && x.password === password
+    userModel.findOne(
+      { email: email, password: password },
+      async (err, user) => {
+        if (user) {
+          await jwt.sign({ user: user }, `secretkey`, (err, token) => {
+            responseObj = {
+              status: 200,
+              result: {
+                token,
+                userInfo: user,
+              },
+            };
+            res.status(responseObj.status).json(responseObj.result);
+          });
+        } else {
+          responseObj = {
+            status: 404,
+            result: {
+              message: `not found`,
+              err: err,
+            },
+          };
+          res.status(responseObj.status).json(responseObj.result);
+        }
+      }
     );
-
-    if (users) {
-      await jwt.sign({ user: users }, `secretkey`, (err, token) => {
-        responseObj = {
-          status: 200,
-          result: {
-            token,
-            userInfo: users,
-          },
-        };
-        res.status(responseObj.status).json(responseObj.result);
-      });
-    } else {
-      responseObj = {
-        status: 404,
-        result: {
-          message: `not found`,
-        },
-      };
-      res.status(responseObj.status).json(responseObj.result);
-    }
   } catch (e) {
     responseObj = {
       status: 404,
@@ -64,27 +72,16 @@ const fetchUser = async (req, res) => {
     res.status(responseObj.status).json(responseObj.result);
   }
 };
-
-const fetchData = async (req, res) => {
+const fetchAllUsers = async (req, res) => {
   let responseObj = {};
   try {
-    const imageData = imageDataset.items;
-    const { token } = req.headers;
-    const fetchDataSubFunction = (authData) => {
-      const {
-        user: { email },
-      } = authData;
-      const userDataset = userImageDataset.find((x) => x.email === email).items;
-      const filtedData = imageData.filter((x) => {
-        if (!userDataset.some((y) => y.id === x.id)) {
-          return x;
-        }
-      });
-      if (imageData) {
+    const users = await userModel.find();
+    const fetchDataSubFunction = () => {
+      if (users) {
         responseObj = {
           status: 200,
           result: {
-            items: filtedData,
+            allUsers: users,
           },
         };
       } else {
@@ -94,6 +91,139 @@ const fetchData = async (req, res) => {
             message: `No data found.`,
           },
         };
+      }
+    };
+    return fetchDataSubFunction();
+  } catch (e) {
+    responseObj = {
+      status: 500,
+      result: {
+        message: `Error, unable to perform action, Server error.`,
+      },
+    };
+    console.log(e, `error occured`);
+  } finally {
+    res.status(responseObj.status).json(responseObj.result);
+  }
+};
+const registerNewUser = async (req, res) => {
+  let responseObj = {};
+  const postObj = req.body;
+  const newUser = new userModel(postObj);
+  try {
+    await newUser.save();
+    const fetchDataSubFunction = () => {
+      if (newUser) {
+        responseObj = {
+          status: 201,
+          result: {
+            newUser,
+          },
+        };
+      } else {
+        responseObj = {
+          status: 404,
+          result: {
+            message: `Unable to perform action.`,
+          },
+        };
+      }
+    };
+    return fetchDataSubFunction();
+  } catch (e) {
+    responseObj = {
+      status: 500,
+      result: {
+        message: `Error, unable to perform action, Server error.`,
+      },
+    };
+    console.log(e, `error occured`);
+  } finally {
+    res.status(responseObj.status).json(responseObj.result);
+  }
+};
+const addAvailableData = async (req, res) => {
+  let responseObj = {};
+  const postObj = req.body;
+  const newData = new availableDataModel(postObj);
+  try {
+    await newData.save();
+    const fetchDataSubFunction = () => {
+      if (newData) {
+        responseObj = {
+          status: 201,
+          result: {
+            newData,
+          },
+        };
+      } else {
+        responseObj = {
+          status: 404,
+          result: {
+            message: `Unable to perform action.`,
+          },
+        };
+      }
+    };
+    return fetchDataSubFunction();
+  } catch (e) {
+    responseObj = {
+      status: 500,
+      result: {
+        message: `Error, unable to perform action, Server error.`,
+      },
+    };
+    console.log(e, `error occured`);
+  } finally {
+    res.status(responseObj.status).json(responseObj.result);
+  }
+};
+const fetchData = async (req, res) => {
+  let responseObj = {};
+  try {
+    const imageData = await availableDataModel.find();
+    const { token } = req.headers;
+    const fetchDataSubFunction = (authData) => {
+      const {
+        user: { email },
+      } = authData;
+      if (imageData) {
+        userDataModel.findOne({ email: email }, async (err, dataFound) => {
+          if (dataFound) {
+            const filtedData = dataFound.filter((x) => {
+              if (!imageData.some((y) => y.id === x.id)) {
+                return x;
+              }
+            });
+            responseObj = {
+              status: 200,
+              result: {
+                token,
+                userInfo: filtedData,
+              },
+            };
+            res.status(responseObj.status).json(responseObj.result);
+          } else {
+            responseObj = {
+              status: 200,
+              result: {
+                token,
+                items: imageData,
+              },
+            };
+            res.status(responseObj.status).json(responseObj.result);
+          }
+        });
+      } else {
+        console.log('did it come here?');
+        responseObj = {
+          status: 404,
+          result: {
+            message: `not found`,
+            err: err,
+          },
+        };
+        res.status(responseObj.status).json(responseObj.result);
       }
     };
     return middleWareForVerifyToken(token, fetchDataSubFunction);
@@ -221,4 +351,7 @@ module.exports = {
   fetchUserInfo,
   fetchUserData,
   postUserImage,
+  fetchAllUsers,
+  registerNewUser,
+  addAvailableData,
 };

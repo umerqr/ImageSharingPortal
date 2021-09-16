@@ -8,7 +8,6 @@ import { AuthContext } from '../../containers/auth/authContext';
 import { notificationWithIcon } from '../../utils/notification';
 import AppCircularProgress from '../AppCircularProgress';
 import { logoTransparent } from '../../utils/images';
-import { useHistory } from 'react-router-dom';
 
 export const isValidEmail = (email) => {
   let re =
@@ -28,13 +27,9 @@ const Login = () => {
   const [errorMail, setErrorMail] = useState(false);
   const [errorPassword, setErrorPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-  let history = useHistory();
   function handleEmailChange(value, stateToUpdate) {
     stateToUpdate(value);
   }
-  useEffect(() => {
-    history.push('/');
-  }, []);
   useEffect(() => {
     if (email !== '') {
       if (isValidEmail(email)) {
