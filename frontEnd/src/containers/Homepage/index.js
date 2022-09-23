@@ -15,6 +15,7 @@ import {
 } from '@ant-design/icons';
 import { logoTransparent } from '../../utils/images';
 import ContentSkeleton from '../ContentHomepage/skeleton';
+import Trips from '../Trips/';
 import ProtectedRoute from '../../components/ProtectedRoute';
 import { AuthContext } from '../auth/authContext';
 import LandingPage from '../../components/LandingPage';
@@ -40,6 +41,7 @@ function Homepage() {
     },
     { label: 'Library', id: 1, icon: <BookOutlined /> },
     { label: 'Users', id: 2, icon: <UserOutlined /> },
+    { label: 'Trips', id: 3, icon: <UserOutlined /> },
   ];
   const [selectedDrawerItem, setSelectedDrawerItem] = useState(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(true);
@@ -145,6 +147,7 @@ function Homepage() {
             <Route exact path='/' component={LandingPage} />
             <Route path='/welcome' component={LandingPage} />
             <Route name path='/profile' component={Profile} />
+            <Route name path='/trips' component={Trips} />
             <ProtectedRoute
               path='/users'
               name='users'
@@ -155,7 +158,7 @@ function Homepage() {
             <ProtectedRoute
               path='/library'
               name='library'
-              component={Library}
+              // component={Library}
               render={(props) => <Library {...props} />}
             />
             <Route exact path='/notFound' component={NotFoundPage} />

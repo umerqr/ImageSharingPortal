@@ -1,6 +1,7 @@
 import axios from 'axios';
 // axios.defaults.baseURL = 'http://localhost:8080';
 axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
+console.log(process.env.REACT_APP_BASE_URL,'REACT_APP_BASE_URL')
 const postUtil = (url, data) => axios.post(url, data);
 
 const putUtil = (url, data) =>
